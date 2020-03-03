@@ -1,0 +1,7 @@
+{
+  "name": "rural-companion",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
