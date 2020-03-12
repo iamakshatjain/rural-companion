@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
 	IonButton,
 	IonCard,
@@ -10,33 +10,54 @@ import {
 	IonIcon,
 	IonItem,
 	IonLabel
-} from '@ionic/react'
+} from '@ionic/react';
 // import { Redirect, Route } from 'react-router-dom'
-import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react'
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
+import { GiCow } from 'react-icons/gi';
+import { FaBaby, FaAccessibleIcon } from 'react-icons/fa';
+import CardList from './components/CardList';
 // import { IonReactRouter } from '@ionic/react-router'
 // import { ellipse, square, triangle } from 'ionicons/icons'
 // import Tab1 from './pages/Tab1'
 // import Tab2 from './pages/Tab2'
 // import Tab3 from './pages/Tab3'
 
+// importing bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 /* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css'
+import '@ionic/react/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css'
-import '@ionic/react/css/structure.css'
-import '@ionic/react/css/typography.css'
+import '@ionic/react/css/normalize.css';
+import '@ionic/react/css/structure.css';
+import '@ionic/react/css/typography.css';
 
 /* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css'
-import '@ionic/react/css/float-elements.css'
-import '@ionic/react/css/text-alignment.css'
-import '@ionic/react/css/text-transformation.css'
-import '@ionic/react/css/flex-utils.css'
-import '@ionic/react/css/display.css'
+import '@ionic/react/css/padding.css';
+import '@ionic/react/css/float-elements.css';
+import '@ionic/react/css/text-alignment.css';
+import '@ionic/react/css/text-transformation.css';
+import '@ionic/react/css/flex-utils.css';
+import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css'
+import './theme/variables.css';
+
+const cards = [
+	{
+		img: FaAccessibleIcon,
+		desc: 'women'
+	},
+	{
+		img: FaBaby,
+		desc: 'children'
+	},
+	{
+		img: GiCow,
+		desc: 'cattle'
+	}
+];
 
 const App = () => (
 	// <IonApp>
@@ -67,41 +88,9 @@ const App = () => (
 	// </IonApp>
 	<IonApp>
 		<IonContent>
-			<IonCard>
-				<IonCardHeader>
-					<IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-					<IonCardTitle>Card Title</IonCardTitle>
-				</IonCardHeader>
-
-				<IonCardContent>
-					Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods.
-					Wash your spirit clean.
-				</IonCardContent>
-			</IonCard>
-			<IonCard>
-				<IonCardHeader>
-					<IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-					<IonCardTitle>Card Title</IonCardTitle>
-				</IonCardHeader>
-
-				<IonCardContent>
-					Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods.
-					Wash your spirit clean.
-				</IonCardContent>
-			</IonCard>
-			<IonCard>
-				<IonCardHeader>
-					<IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-					<IonCardTitle>Card Title</IonCardTitle>
-				</IonCardHeader>
-
-				<IonCardContent>
-					Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods.
-					Wash your spirit clean.
-				</IonCardContent>
-			</IonCard>
+			<CardList cards={cards} />
 		</IonContent>
 	</IonApp>
-)
+);
 
-export default App
+export default App;
