@@ -11,12 +11,12 @@ import {
 	IonItem,
 	IonLabel
 } from '@ionic/react';
-// import { Redirect, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { GiCow } from 'react-icons/gi';
 import { FaBaby, FaAccessibleIcon } from 'react-icons/fa';
 import CardList from './components/CardList';
-// import { IonReactRouter } from '@ionic/react-router'
+import { IonReactRouter } from '@ionic/react-router'
 // import { ellipse, square, triangle } from 'ionicons/icons'
 // import Tab1 from './pages/Tab1'
 // import Tab2 from './pages/Tab2'
@@ -44,7 +44,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const cards = [
+const categoryCards = [
 	{
 		img: FaAccessibleIcon,
 		desc: 'women'
@@ -58,6 +58,33 @@ const cards = [
 		desc: 'cattle'
 	}
 ];
+
+const categoryVoices = {
+	"women" : "महिलाओं के बारे में जानकारी के लिए लाल बटन दबाएं",
+	"children" : "शिशुओं के बारे में जानकारी के लिए हरे बटन को दबाएं",
+	"cattle" : "मवेशियों के बारे में जानकारी के लिए नीले बटन को दबाएं"
+}
+
+const informationCards = [
+	{
+		img: FaAccessibleIcon,
+		desc: 'disease'
+	},
+	{
+		img: FaBaby,
+		desc: 'nutrition'
+	},
+	{
+		img: GiCow,
+		desc: 'hygiene'
+	}
+];
+
+const informationVoices = {
+	"disease" : "रोगों के बारे में जानने के लिए लाल बटन दबाएं",
+	"nutrition" : "स्वास्थ्य और पोषण के बारे में जानकारी प्राप्त करने के लिए, हरे बटन को दबाएं",
+	"hygiene" : "दैनिक स्वच्छता के बारे में जानने के लिए, नीले बटन को दबाएं"
+}
 
 const App = () => (
 	// <IonApp>
@@ -87,9 +114,15 @@ const App = () => (
 	// 	</IonReactRouter>
 	// </IonApp>
 	<IonApp>
-		<IonContent>
+		<IonReactRouter>
+			<IonRouterOutlet>
+				<Route path="/" component={() => <CardList cards={categoryCards} voices={categoryVoices}/>} exact={true} />
+				<Route path="/info-list" component={() => <CardList cards={informationCards} voices={informationVoices}/>} exact={true} />
+			</IonRouterOutlet>
+		</IonReactRouter>
+		{/* <IonContent>
 			<CardList cards={cards} />
-		</IonContent>
+		</IonContent> */}
 	</IonApp>
 );
 
