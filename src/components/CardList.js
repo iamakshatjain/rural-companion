@@ -1,10 +1,11 @@
-import React from 'react';
-import { IonCard, IonGrid, IonRow, IonCol } from '@ionic/react';
+import React from 'react'
+import { IonCard, IonGrid, IonRow, IonCol } from '@ionic/react'
+
 const CardList = ({ cards }) => {
-	return cards.map((card) => {
-		const Img = card.img;
+	return cards.map(card => {
+		const Img = card.img
 		return (
-			<IonCard>
+			<IonCard onClick={() => window.responsiveVoice.speak('hello world')}>
 				<IonGrid>
 					<IonRow>
 						<IonCol size="5">
@@ -16,8 +17,8 @@ const CardList = ({ cards }) => {
 					</IonRow>
 				</IonGrid>
 			</IonCard>
-		);
-	});
-};
+		)
+	})
+}
 
-export default CardList;
+export default CardList
