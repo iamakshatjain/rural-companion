@@ -59,9 +59,21 @@ const instructUser = (instructions) => {
 
 const CardList = ({ cards, voices, match }) => {
 
+	//componentDidMount
+	useEffect(()=> {
+		let instructions = Object.values(voices);
+		instructUser(instructions);
+	}, []);
+
 	return(
 		<div>
-			{renderCards(cards, voices, match)}
+		<IonButton onClick = {() => {
+			let instructions = Object.values(voices);
+			instructUser(instructions);
+		}}>
+			Replay
+		</IonButton>
+		{renderCards(cards, voices, match)}
 		</div>
 		
 	);
