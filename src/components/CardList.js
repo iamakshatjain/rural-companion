@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonCard, IonGrid, IonRow, IonCol, IonItem } from '@ionic/react';
-import { GiEntryDoor } from 'react-icons/gi';
+import { FaPowerOff } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 // const voices = {
 // 	"women" : "महिलाओं के बारे में जानकारी के लिए लाल बटन दबाएं",
@@ -20,10 +21,9 @@ const CardList = ({ cards, voices, match }) => {
 							<Img size="9em" />
 						</IonCol>
 						<IonCol size="7">
-							<IonItem routerLink={`${match.url}${card.desc}/`}>
-								{/* <IonItem routerLink={match.path !== '/' ? `${match.path}/${card.desc}` : `/${card.desc}`}> */}
-								<GiEntryDoor />
-							</IonItem>
+							<Link to={`${match.url}${card.desc}/`}>
+								<FaPowerOff size={70} color="red" />
+							</Link>
 						</IonCol>
 					</IonRow>
 				</IonGrid>
