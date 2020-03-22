@@ -1,16 +1,45 @@
-import React from 'react';
-import { IonCard, IonGrid, IonRow, IonCol, IonItem } from '@ionic/react';
-import { FaPowerOff } from 'react-icons/fa';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { IonButton, IonCard, IonGrid, IonRow, IonCol } from '@ionic/react';
 
-// const voices = {
-// 	"women" : "महिलाओं के बारे में जानकारी के लिए लाल बटन दबाएं",
-// 	"children" : "शिशुओं के बारे में जानकारी के लिए हरे बटन को दबाएं",
-// 	"cattle" : "मवेशियों के बारे में जानकारी के लिए नीले बटन को दबाएं"
-// }
+const renderButton = (card) => {
+	if (card.desc === 'women' || card.desc === 'disease') {
+		return (
+			<IonButton
+				color="danger"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	} else if (card.desc === 'children' || card.desc === 'nutrition') {
+		return (
+			<IonButton
+				color="success"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	} else {
+		return (
+			<IonButton
+				color="primary"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	}
+};
 
-const CardList = ({ cards, voices, match }) => {
-	console.log(match);
+const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
 		const Img = card.img;
 		return (
@@ -21,8 +50,8 @@ const CardList = ({ cards, voices, match }) => {
 							<Img size="9em" />
 						</IonCol>
 						<IonCol size="7">
-							<Link to={`${match.url}${card.desc}/`}>
-								<FaPowerOff size={70} color="red" />
+							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
+								{renderButton(card)}
 							</Link>
 						</IonCol>
 					</IonRow>
@@ -30,6 +59,34 @@ const CardList = ({ cards, voices, match }) => {
 			</IonCard>
 		);
 	});
+};
+
+const instructUser = (instructions) => {
+	for (let i = 0; i < instructions.length; i++) {
+		window.responsiveVoice.speak(instructions[i], 'Hindi Female', { rate: 0.9 });
+	}
+};
+
+const CardList = ({ cards, voices, match }) => {
+	//componentDidMount
+	useEffect(() => {
+		let instructions = Object.values(voices);
+		instructUser(instructions);
+	}, []);
+
+	return (
+		<div>
+			<IonButton
+				onClick={() => {
+					let instructions = Object.values(voices);
+					instructUser(instructions);
+				}}
+			>
+				Replay
+			</IonButton>
+			{renderCards(cards, voices, match)}
+		</div>
+	);
 };
 
 export default CardList;
