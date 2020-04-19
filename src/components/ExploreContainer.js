@@ -1,8 +1,7 @@
-import React from 'react'
-import './ExploreContainer.css'
+import React from 'react';
+import '../assets/stylesheets/ExploreContainer.css';
+const ExploreContainer = () => {
+	return <div>Hi</div>;
+};
 
-const ExploreContainer = ({ name }) => {
-	return <div className="container">Hi</div>
-}
-
-export default ExploreContainer
+export default ExploreContainer;

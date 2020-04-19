@@ -44,6 +44,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import ExploreContainer from './components/ExploreContainer';
 
 const categoryCards = [
 	{
@@ -123,6 +124,11 @@ const App = (props) => {
 			<IonReactRouter>
 				<IonRouterOutlet>
 					<Switch>
+						<Route
+							path="/:category/:info"
+							render={(props) => <ExploreContainer {...props} />}
+							exact={true}
+						/>
 						<Route
 							path="/:category"
 							render={(props) => (
