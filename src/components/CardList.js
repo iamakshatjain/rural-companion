@@ -1,24 +1,92 @@
-import React from 'react'
-import { IonCard, IonGrid, IonRow, IonCol } from '@ionic/react'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { IonButton, IonCard, IonGrid, IonRow, IonCol } from '@ionic/react';
 
-const CardList = ({ cards }) => {
-	return cards.map(card => {
-		const Img = card.img
+const renderButton = (card) => {
+	if (card.desc === 'women' || card.desc === 'disease') {
 		return (
-			<IonCard onClick={() => window.responsiveVoice.speak('hello world')}>
+			<IonButton
+				color="danger"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	} else if (card.desc === 'children' || card.desc === 'nutrition') {
+		return (
+			<IonButton
+				color="success"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	} else {
+		return (
+			<IonButton
+				color="primary"
+				expand="block"
+				size="large"
+				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+			>
+				>
+			</IonButton>
+		);
+	}
+};
+
+const renderCards = (cards, voices, match) => {
+	return cards.map((card) => {
+		const Img = card.img;
+		return (
+			<IonCard onClick={() => window.responsiveVoice.speak(voices[card.desc], 'Hindi Female', { rate: 0.9 })}>
 				<IonGrid>
 					<IonRow>
 						<IonCol size="5">
 							<Img size="9em" />
 						</IonCol>
 						<IonCol size="7">
-							<div className="mt-5 ml-5">{card.desc}</div>
+							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
+								{renderButton(card)}
+							</Link>
 						</IonCol>
 					</IonRow>
 				</IonGrid>
 			</IonCard>
-		)
-	})
-}
+		);
+	});
+};
 
-export default CardList
+const instructUser = (instructions) => {
+	for (let i = 0; i < instructions.length; i++) {
+		window.responsiveVoice.speak(instructions[i], 'Hindi Female', { rate: 0.9 });
+	}
+};
+
+const CardList = ({ cards, voices, match }) => {
+	//componentDidMount
+	useEffect(() => {
+		let instructions = Object.values(voices);
+		instructUser(instructions);
+	}, []);
+
+	return (
+		<div>
+			<IonButton
+				onClick={() => {
+					let instructions = Object.values(voices);
+					instructUser(instructions);
+				}}
+			>
+				Replay
+			</IonButton>
+			{renderCards(cards, voices, match)}
+		</div>
+	);
+};
+
+export default CardList;
