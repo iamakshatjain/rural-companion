@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IonButton, IonCard, IonGrid, IonRow, IonCol } from '@ionic/react';
+import { GiConsoleController } from 'react-icons/gi';
+const SYNTH = window.speechSynthesis;
+var utterance = new SpeechSynthesisUtterance();
 
 const renderButton = (card) => {
 	if (card.desc === 'women' || card.desc === 'disease') {
@@ -10,6 +13,7 @@ const renderButton = (card) => {
 				expand="block"
 				size="large"
 				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+				onClick={() => SYNTH.cancel()}
 			>
 				>
 			</IonButton>
@@ -21,6 +25,7 @@ const renderButton = (card) => {
 				expand="block"
 				size="large"
 				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+				onClick={() => SYNTH.cancel()}
 			>
 				>
 			</IonButton>
@@ -32,6 +37,7 @@ const renderButton = (card) => {
 				expand="block"
 				size="large"
 				style={{ height: '100%', width: '50%', float: 'right', padding: '0px' }}
+				onClick={() => SYNTH.cancel()}
 			>
 				>
 			</IonButton>
@@ -43,7 +49,7 @@ const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
 		const Img = card.img;
 		return (
-			<IonCard onClick={() => window.responsiveVoice.speak(voices[card.desc], 'Hindi Female', { rate: 0.9 })}>
+			<IonCard onClick={() => instructUser([voices[card.desc]])}>
 				<IonGrid>
 					<IonRow>
 						<IonCol size="5">
@@ -62,27 +68,51 @@ const renderCards = (cards, voices, match) => {
 };
 
 const instructUser = (instructions) => {
+	var instruction = "";
 	for (let i = 0; i < instructions.length; i++) {
-		window.responsiveVoice.speak(instructions[i], 'Hindi Female', { rate: 0.9 });
+		instruction+=instructions[i];
+		//hindi viram chinh
+		instruction+="।";
 	}
+
+	console.log(instruction);
+	utterance.text = instruction;
+	SYNTH.speak(utterance);
 };
 
 const CardList = ({ cards, voices, match }) => {
-	//componentDidMount
+	//componentDidUpdate
 	useEffect(() => {
+		SYNTH.cancel();
+		const voice = SYNTH.getVoices().filter(function(voice) {
+			return voice.lang === "hi-IN";
+		  })[0];
+
+		utterance.voice = voice;
+		utterance.rate = 0.75;
+		utterance.volume = 0.8;
+
 		let instructions = Object.values(voices);
 		instructUser(instructions);
-	}, []);
+	});
 
 	return (
 		<div>
 			<IonButton
 				onClick={() => {
+					SYNTH.cancel();
 					let instructions = Object.values(voices);
 					instructUser(instructions);
 				}}
 			>
 				Replay
+			</IonButton>
+			<IonButton
+				onClick={() => {
+					SYNTH.cancel();
+					}}
+			>
+				Stop
 			</IonButton>
 			{renderCards(cards, voices, match)}
 		</div>
