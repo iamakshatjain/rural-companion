@@ -9,7 +9,7 @@ import {
 	IonContent,
 	IonIcon,
 	IonItem,
-	IonLabel
+	IonLabel,
 } from '@ionic/react'
 import { Route, Switch } from 'react-router-dom'
 // import history from './history';
@@ -45,53 +45,54 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
+import ExploreContainer from './components/ExploreContainer'
 
 const categoryCards = [
 	{
 		img: IoIosWoman,
-		desc: 'women'
+		desc: 'women',
 	},
 	{
 		img: FaBaby,
 		desc: 'children',
-		route: '/'
+		route: '/',
 	},
 	{
 		img: GiCow,
 		desc: 'cattle',
-		route: '/'
-	}
+		route: '/',
+	},
 ]
 
 const categoryVoices = {
 	women: 'महिलाओं के बारे में जानकारी के लिए लाल बटन दबाएं',
 	children: 'शिशुओं के बारे में जानकारी के लिए हरे बटन को दबाएं',
-	cattle: 'मवेशियों के बारे में जानकारी के लिए नीले बटन को दबाएं'
+	cattle: 'मवेशियों के बारे में जानकारी के लिए नीले बटन को दबाएं',
 }
 
 const informationCards = [
 	{
 		img: GiHealthNormal,
 		desc: 'disease',
-		route: ''
+		route: '',
 	},
 	{
 		img: GiOpenedFoodCan,
-		desc: 'nutrition'
+		desc: 'nutrition',
 	},
 	{
 		img: GiVacuumCleaner,
-		desc: 'hygiene'
-	}
+		desc: 'hygiene',
+	},
 ]
 
 const informationVoices = {
 	disease: 'रोगों के बारे में जानने के लिए लाल बटन दबाएं',
 	nutrition: 'स्वास्थ्य और पोषण के बारे में जानकारी प्राप्त करने के लिए, हरे बटन को दबाएं',
-	hygiene: 'दैनिक स्वच्छता के बारे में जानने के लिए, नीले बटन को दबाएं'
+	hygiene: 'दैनिक स्वच्छता के बारे में जानने के लिए, नीले बटन को दबाएं',
 }
 
-const App = props => {
+const App = (props) => {
 	return (
 		// <IonApp>
 		// 	<IonReactRouter>
@@ -123,14 +124,15 @@ const App = props => {
 			<IonReactRouter>
 				<IonRouterOutlet>
 					<Switch>
+						<Route path="/:category/:info" render={(props) => <ExploreContainer {...props} />} exact={true} />
 						<Route
 							path="/:category"
-							render={props => <CardList cards={informationCards} voices={informationVoices} {...props} />}
+							render={(props) => <CardList cards={informationCards} voices={informationVoices} {...props} />}
 							exact={true}
 						/>
 						<Route
 							path="/"
-							render={props => <CardList cards={categoryCards} voices={categoryVoices} {...props} />}
+							render={(props) => <CardList cards={categoryCards} voices={categoryVoices} {...props} />}
 							exact={true}
 						/>
 					</Switch>
