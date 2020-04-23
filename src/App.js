@@ -45,7 +45,7 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
-import ExploreContainer from './components/ExploreContainer'
+import VideoPlayer from './components/VideoPlayer'
 
 const categoryCards = [
 	{
@@ -124,7 +124,7 @@ const App = (props) => {
 			<IonReactRouter>
 				<IonRouterOutlet>
 					<Switch>
-						<Route path="/:category/:info" render={(props) => <ExploreContainer {...props} />} exact={true} />
+						<Route path="/:category/:info" render={(props) => <VideoPlayer {...props} />} exact={true} />
 						<Route
 							path="/:category"
 							render={(props) => <CardList cards={informationCards} voices={informationVoices} {...props} />}
