@@ -3,7 +3,7 @@ import YouTubePlayer from 'react-player/lib/players/YouTube'
 
 import '../assets/stylesheets/VideoPlayer.css'
 
-const url = 'https://www.youtube.com/watch?v=qdqJfFkQKEI'
+const url = 'https://www.youtube.com/watch?v=StMCcxiRSL8'
 
 const VideoPlayer = () => {
 	return (
