@@ -49,10 +49,10 @@ const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
 		const Img = card.img;
 		return (
-			<IonCard onClick={() => instructUser([voices[card.desc]])}>
+			<IonCard onClick={() => instructUser([ voices[card.desc] ])}>
 				<IonGrid>
 					<IonRow>
-						<IonCol size="5">
+						<IonCol size="2">
 							<Img size="9em" />
 						</IonCol>
 						<IonCol size="7">
@@ -68,11 +68,11 @@ const renderCards = (cards, voices, match) => {
 };
 
 const instructUser = (instructions) => {
-	var instruction = "";
+	var instruction = '';
 	for (let i = 0; i < instructions.length; i++) {
-		instruction+=instructions[i];
+		instruction += instructions[i];
 		//hindi viram chinh
-		instruction+="।";
+		instruction += '।';
 	}
 
 	console.log(instruction);
@@ -85,8 +85,8 @@ const CardList = ({ cards, voices, match }) => {
 	useEffect(() => {
 		SYNTH.cancel();
 		const voice = SYNTH.getVoices().filter(function(voice) {
-			return voice.lang === "hi-IN";
-		  })[0];
+			return voice.lang === 'hi-IN';
+		})[0];
 
 		utterance.voice = voice;
 		utterance.rate = 0.75;
@@ -110,7 +110,7 @@ const CardList = ({ cards, voices, match }) => {
 			<IonButton
 				onClick={() => {
 					SYNTH.cancel();
-					}}
+				}}
 			>
 				Stop
 			</IonButton>
