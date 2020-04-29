@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { IonButton, IonCard, IonGrid, IonRow, IonCol } from '@ionic/react';
-import { GiConsoleController } from 'react-icons/gi';
-const SYNTH = window.speechSynthesis;
-var utterance = new SpeechSynthesisUtterance();
+import React, { useEffect, Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
+import { GiConsoleController } from 'react-icons/gi'
+const SYNTH = window.speechSynthesis
+var utterance = new SpeechSynthesisUtterance()
 
 const renderButton = (card) => {
 	if (card.desc === 'women' || card.desc === 'disease') {
@@ -17,7 +17,7 @@ const renderButton = (card) => {
 			>
 				>
 			</IonButton>
-		);
+		)
 	} else if (card.desc === 'children' || card.desc === 'nutrition') {
 		return (
 			<IonButton
@@ -29,7 +29,7 @@ const renderButton = (card) => {
 			>
 				>
 			</IonButton>
-		);
+		)
 	} else {
 		return (
 			<IonButton
@@ -41,15 +41,15 @@ const renderButton = (card) => {
 			>
 				>
 			</IonButton>
-		);
+		)
 	}
-};
+}
 
 const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
-		const Img = card.img;
+		const Img = card.img
 		return (
-			<IonCard onClick={() => instructUser([ voices[card.desc] ])}>
+			<IonCard onClick={() => instructUser([voices[card.desc]])}>
 				<IonGrid>
 					<IonRow>
 						<IonCol size="2">
@@ -63,60 +63,63 @@ const renderCards = (cards, voices, match) => {
 					</IonRow>
 				</IonGrid>
 			</IonCard>
-		);
-	});
-};
+		)
+	})
+}
 
 const instructUser = (instructions) => {
-	var instruction = '';
+	var instruction = ''
 	for (let i = 0; i < instructions.length; i++) {
-		instruction += instructions[i];
+		instruction += instructions[i]
 		//hindi viram chinh
-		instruction += '।';
+		instruction += '।'
 	}
 
-	console.log(instruction);
-	utterance.text = instruction;
-	SYNTH.speak(utterance);
-};
+	console.log(instruction)
+	utterance.text = instruction
+	SYNTH.speak(utterance)
+}
 
 const CardList = ({ cards, voices, match }) => {
 	//componentDidUpdate
 	useEffect(() => {
-		SYNTH.cancel();
-		const voice = SYNTH.getVoices().filter(function(voice) {
-			return voice.lang === 'hi-IN';
-		})[0];
+		SYNTH.cancel()
+		const voice = SYNTH.getVoices().filter(function (voice) {
+			return voice.lang === 'hi-IN'
+		})[0]
 
-		utterance.voice = voice;
-		utterance.rate = 0.75;
-		utterance.volume = 0.8;
+		utterance.voice = voice
+		utterance.rate = 0.75
+		utterance.volume = 0.8
 
-		let instructions = Object.values(voices);
-		instructUser(instructions);
-	});
+		let instructions = Object.values(voices)
+		instructUser(instructions)
+	})
 
 	return (
-		<div>
+		<Fragment>
 			<IonButton
 				onClick={() => {
-					SYNTH.cancel();
-					let instructions = Object.values(voices);
-					instructUser(instructions);
+					SYNTH.cancel()
+					let instructions = Object.values(voices)
+					instructUser(instructions)
 				}}
 			>
 				Replay
 			</IonButton>
 			<IonButton
 				onClick={() => {
-					SYNTH.cancel();
+					SYNTH.cancel()
 				}}
 			>
 				Stop
 			</IonButton>
-			{renderCards(cards, voices, match)}
-		</div>
-	);
-};
+			{/* if overscroll issue add style={{ '--padding-bottom': 'xrem' }} to the IonContent accordingly
+			to adjust the padding bottom so that list elements display correctly. Here it is not required as 
+			list is small. */}
+			<IonContent>{renderCards(cards, voices, match)}</IonContent>
+		</Fragment>
+	)
+}
 
-export default CardList;
+export default CardList
