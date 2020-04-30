@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "name": "category"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "information": {
+      "via": "category",
+      "collection": "information"
+    },
+    "image_url": {
+      "type": "richtext"
+    },
+    "name": {
+      "type": "richtext"
+    }
+  }
+}
