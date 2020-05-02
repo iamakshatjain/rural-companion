@@ -8,24 +8,24 @@ import Water from '../assets/images/water.svg'
 
 const data = [
 	{
-		title: 'Vegetables',
-		content: 'The more veggies – and the greater the variety – the better.',
+		title: 'सब्जियां',
+		content: 'जितनी ज्यादा सब्जियां और वैरायटी उतनी ही बेहतर।',
 		image: Vegetables,
 	},
 	{
-		title: 'Fruits',
+		title: 'फल',
 		image: Fruits,
-		content: 'Choose whole fruits or sliced fruits (rather than fruit juices; limit fruit juice to one small glass per day).',
+		content: 'पूरे फलों या कटे हुए फलों को चुनें (फलों के रस के बजाय) फलों के रस को प्रतिदिन एक छोटे गिलास तक सीमित करें।',
 	},
 	{
-		title: 'Dairy',
+		title: 'दुग्धालय',
 		image: Dairy,
-		content: 'Choose unflavored milk, plain yogurt, small amounts of cheese, and other unsweetened dairy foods.',
+		content: 'सादा दूध, सादा दही, कम मात्रा में पनीर और अन्य गैर मीठे डेयरी खाद्य पदार्थ चुनें।',
 	},
 	{
-		title: 'Water',
+		title: 'पानी',
 		image: Water,
-		content: 'Water is the best choice for quenching our thirst. It’s also sugar-free, and as easy to find as the nearest tap.',
+		content: 'पानी हमारी प्यास बुझाने का सबसे अच्छा विकल्प है। यह चीनी मुक्त भी है, और निकटतम नल के रूप में आसानी से मिल जाता है।Water is the best choice for quenching our thirst. It’s also sugar-free, and as easy to find as the nearest tap.',
 	},
 ]
 

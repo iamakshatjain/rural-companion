@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
+import { IonButton, IonCard, IonCardTitle, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
 import { GiConsoleController } from 'react-icons/gi'
 const SYNTH = window.speechSynthesis
 var utterance = new SpeechSynthesisUtterance()
@@ -45,6 +45,16 @@ const renderButton = (card) => {
 	}
 }
 
+// temporary method
+const toHindi = (desc) => {
+	if(desc === "women") return "महिलाएं";
+	else if (desc === "children") return "बच्चे";
+	else if (desc === "cattle") return "पशु";
+	else if (desc === "disease") return "रोग";
+	else if (desc === "nutrition") return "पोषण";
+	else if (desc === "hygiene") return "स्वच्छता";
+} 
+
 const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
 		const Img = card.img
@@ -52,10 +62,13 @@ const renderCards = (cards, voices, match) => {
 			<IonCard onClick={() => instructUser([voices[card.desc]])}>
 				<IonGrid>
 					<IonRow>
-						<IonCol size="2">
+						<IonCol>
 							<Img size="9em" />
 						</IonCol>
-						<IonCol size="7">
+						<IonCol>
+							<IonCardTitle>{toHindi(card.desc)}</IonCardTitle>
+						</IonCol>
+						<IonCol>
 							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
 								{renderButton(card)}
 							</Link>
