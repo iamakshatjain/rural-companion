@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
+import {useState, useLayoutEffect, useRef} from 'react';
+
 import VideoPlayer from './VideoPlayer'
 import { IonCardHeader, IonCardTitle, IonCardContent, IonList, IonCard, IonRow, IonCol, IonIcon, IonGrid, IonContent } from '@ionic/react'
 import Vegetables from '../assets/images/clubbed_veg.svg'
@@ -25,23 +27,45 @@ const data = [
 	{
 		title: 'पानी',
 		image: Water,
-		content: 'पानी हमारी प्यास बुझाने का सबसे अच्छा विकल्प है। यह चीनी मुक्त भी है, और निकटतम नल के रूप में आसानी से मिल जाता है।Water is the best choice for quenching our thirst. It’s also sugar-free, and as easy to find as the nearest tap.',
+		content: 'पानी हमारी प्यास बुझाने का सबसे अच्छा विकल्प है। यह चीनी मुक्त भी है, और निकटतम नल के रूप में आसानी से मिल जाता है।',
 	},
 ]
 
 const Info = () => {
+	const [playerHeight, setPlayerHeight] = useState(0);
+	const ref = useRef(null);
+
+	// url would be dynamically served
+	const url = 'https://www.youtube.com/watch?v=StMCcxiRSL8';
+
+	useLayoutEffect(() => {
+		setTimeout(() => {
+			const {clientHeight} = ref.current;
+			setPlayerHeight(clientHeight);
+		}, 1);
+	})
+
 	{
 		/* Don't put IonContent inside any parent element, otherwise it won't work. It should be at the root 
 		of the component. That's why use Fragment instead to render same level elements. */
 	}
+
 	return (
 		<Fragment>
-			<VideoPlayer />
-			<IonContent style={{ '--padding-bottom': '12rem' }}>
+			<div className="player-wrapper" ref = {ref} >
+				<VideoPlayer url = {url}/>
+			</div>
+	
+			<div 
+				style={{
+					height : (window.innerHeight - playerHeight), 
+					overflowY : "scroll"
+				}}
+			>
 				<IonList>
 					{data.map((item) => {
 						return (
-							<IonCard>
+							<IonCard key={item.image}>
 								<IonGrid>
 									<IonRow>
 										<IonCol size="2">
@@ -60,7 +84,9 @@ const Info = () => {
 						)
 					})}
 				</IonList>
-			</IonContent>
+			</div>
+			{/* Youtube recommendations */}
+			{/* fixed with URL rendered with API and stored in redux store */}
 		</Fragment>
 	)
 }
