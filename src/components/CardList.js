@@ -59,7 +59,10 @@ const renderCards = (cards, voices, match) => {
 	return cards.map((card) => {
 		const Img = card.img
 		return (
-			<IonCard onClick={() => instructUser([voices[card.desc]])}>
+			<IonCard onClick={() => {
+				SYNTH.cancel();
+				instructUser([voices[card.desc]])
+				}}>
 				<IonGrid>
 					<IonRow>
 						<IonCol>
@@ -69,7 +72,9 @@ const renderCards = (cards, voices, match) => {
 							<IonCardTitle>{toHindi(card.desc)}</IonCardTitle>
 						</IonCol>
 						<IonCol>
-							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
+							<Link 
+								to={`${match.url}${card.desc}/`} 
+								onClick={(e) => e.stopPropagation()}>
 								{renderButton(card)}
 							</Link>
 						</IonCol>
@@ -88,7 +93,6 @@ const instructUser = (instructions) => {
 		instruction += '।'
 	}
 
-	console.log(instruction)
 	utterance.text = instruction
 	SYNTH.speak(utterance)
 }
