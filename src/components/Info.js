@@ -106,7 +106,7 @@ const Info = () => {
 				</IonList>
 
 				<h1 
-					sytle={{
+					style={{
 						paddingLeft: '20px',
 						fontSize: '2.5rem'
 					}}
