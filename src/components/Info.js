@@ -8,6 +8,7 @@ import Fruits from '../assets/images/clubbed_fruits.svg'
 import Dairy from '../assets/images/milk.svg'
 import Water from '../assets/images/water.svg'
 
+// todo : would be served from store later
 const data = [
 	{
 		title: 'सब्जियां',
@@ -31,12 +32,50 @@ const data = [
 	},
 ]
 
+const recommendations = [
+	{
+		URL : 'https://www.youtube.com/watch?v=13cHnQ1Suj8',
+		icon : Vegetables,
+		title : 'Recommended Video 1',
+	},
+	{
+		URL : 'https://www.youtube.com/watch?v=hMBKmQEPNzI',
+		icon : Vegetables,
+		title : 'Recommended Video 2',
+	},
+	{
+		URL : 'https://www.youtube.com/watch?v=3qPgHJEtOHQ',
+		icon : Vegetables,
+		title : 'Recommended Video 3',
+	},
+];
+
+const createIonCard = (icon, title, content, onClick) => {
+	return (
+		<IonCard key={icon} onClick={onClick}>
+			<IonGrid>
+				<IonRow>
+					<IonCol size="2">
+						<IonIcon icon={icon} style={{ fontSize: '90px' }} />
+					</IonCol>
+					<IonCol size="1" />
+					<IonCol size="8">
+						<IonCardHeader>
+							<IonCardTitle>{title}</IonCardTitle>
+						</IonCardHeader>
+						<IonCardContent>{content}</IonCardContent>
+					</IonCol>
+				</IonRow>
+			</IonGrid>
+		</IonCard>
+	)
+}
+
 const Info = () => {
 	const [playerHeight, setPlayerHeight] = useState(0);
+	// todo : url would be dynamically served from redux-store
+	const [URL, setURL] = useState('https://www.youtube.com/watch?v=StMCcxiRSL8');
 	const ref = useRef(null);
-
-	// url would be dynamically served
-	const url = 'https://www.youtube.com/watch?v=StMCcxiRSL8';
 
 	useLayoutEffect(() => {
 		setTimeout(() => {
@@ -53,7 +92,7 @@ const Info = () => {
 	return (
 		<Fragment>
 			<div className="player-wrapper" ref = {ref} >
-				<VideoPlayer url = {url}/>
+				<VideoPlayer url = {URL}/>
 			</div>
 	
 			<div 
@@ -63,30 +102,30 @@ const Info = () => {
 				}}
 			>
 				<IonList>
-					{data.map((item) => {
-						return (
-							<IonCard key={item.image}>
-								<IonGrid>
-									<IonRow>
-										<IonCol size="2">
-											<IonIcon icon={item.image} style={{ fontSize: '90px' }} />
-										</IonCol>
-										<IonCol size="1" />
-										<IonCol size="8">
-											<IonCardHeader>
-												<IonCardTitle>{item.title}</IonCardTitle>
-											</IonCardHeader>
-											<IonCardContent>{item.content}</IonCardContent>
-										</IonCol>
-									</IonRow>
-								</IonGrid>
-							</IonCard>
-						)
-					})}
+					{data.map((item) => createIonCard(item.image, item.title, item.content))}
 				</IonList>
+
+				<h1 
+					sytle={{
+						paddingLeft: '20px',
+						fontSize: '2.5rem'
+					}}
+				>
+					अन्य वीडियो
+				</h1>
+				
+				{/* Youtube recommendations */}
+				{/* fixed with URL rendered with API and stored in redux store */}
+				<div>
+					<IonList>
+						{
+							recommendations.map((item) => createIonCard(item.icon, item.title, item.content, () => {
+								setURL(item.URL);
+							}))
+						}
+					</IonList>
+				</div>
 			</div>
-			{/* Youtube recommendations */}
-			{/* fixed with URL rendered with API and stored in redux store */}
 		</Fragment>
 	)
 }
