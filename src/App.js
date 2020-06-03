@@ -1,28 +1,8 @@
-import React from 'react'
-import {
-	IonButton,
-	IonCard,
-	IonCardContent,
-	IonCardHeader,
-	IonCardSubtitle,
-	IonCardTitle,
-	IonContent,
-	IonIcon,
-	IonItem,
-	IonLabel,
-} from '@ionic/react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-// import history from './history';
-import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react'
-import { GiCow, GiHealthNormal, GiOpenedFoodCan, GiVacuumCleaner } from 'react-icons/gi'
-import { FaBaby } from 'react-icons/fa'
-import { IoIosWoman } from 'react-icons/io'
+import { IonApp, IonRouterOutlet } from '@ionic/react'
 import CardList from './components/CardList'
 import { IonReactRouter } from '@ionic/react-router'
-// import { ellipse, square, triangle } from 'ionicons/icons'
-// import Tab1 from './pages/Tab1'
-// import Tab2 from './pages/Tab2'
-// import Tab3 from './pages/Tab3'
 
 // importing bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -45,68 +25,27 @@ import '@ionic/react/css/display.css'
 
 /* Theme variables */
 import './theme/variables.css'
+
 import Info from './components/Info'
-
-const categoryCards = [
-	{
-		img: IoIosWoman,
-		desc: 'women',
-	},
-	{
-		img: FaBaby,
-		desc: 'children',
-		route: '/',
-	},
-	{
-		img: GiCow,
-		desc: 'cattle',
-		route: '/',
-	},
-]
-
-const categoryVoices = {
-	women: 'महिलाओं के बारे में जानकारी के लिए लाल बटन दबाएं',
-	children: 'शिशुओं के बारे में जानकारी के लिए हरे बटन को दबाएं',
-	cattle: 'मवेशियों के बारे में जानकारी के लिए नीले बटन को दबाएं',
-}
-
-const informationCards = [
-	{
-		img: GiHealthNormal,
-		desc: 'disease',
-		route: '',
-	},
-	{
-		img: GiOpenedFoodCan,
-		desc: 'nutrition',
-	},
-	{
-		img: GiVacuumCleaner,
-		desc: 'hygiene',
-	},
-]
-
-const informationVoices = {
-	disease: 'रोगों के बारे में जानने के लिए लाल बटन दबाएं',
-	nutrition: 'स्वास्थ्य और पोषण के बारे में जानकारी प्राप्त करने के लिए, हरे बटन को दबाएं',
-	hygiene: 'दैनिक स्वच्छता के बारे में जानने के लिए, नीले बटन को दबाएं',
-}
+import { informationSentences, categorySentences } from './static-data/sentences'
+import { informationCards, categoryCards } from './static-data/cards'
 
 const App = (props) => {
 	return (
 		<IonApp overflow-scroll="true">
+			{/* <AccessibilityButton /> */}
 			<IonReactRouter>
 				<IonRouterOutlet>
 					<Switch>
 						<Route path="/:category/:info" render={(props) => <Info {...props} />} exact={true} />
 						<Route
 							path="/:category"
-							render={(props) => <CardList cards={informationCards} voices={informationVoices} {...props} />}
+							render={(props) => <CardList cards={informationCards} voices={informationSentences} {...props} />}
 							exact={true}
 						/>
 						<Route
 							path="/"
-							render={(props) => <CardList cards={categoryCards} voices={categoryVoices} {...props} />}
+							render={(props) => <CardList cards={categoryCards} voices={categorySentences} {...props} />}
 							exact={true}
 						/>
 					</Switch>

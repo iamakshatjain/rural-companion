@@ -1,0 +1,1 @@
+export const INITIALISE_VOICE = 'INITIALISE_VOICE'
