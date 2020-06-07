@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
+import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
 
 import AccessibilityButton from './AccessibilityButton'
 import { initialiseVoice } from '../actions'
@@ -40,7 +40,6 @@ const toHindi = (desc) => {
 
 const renderCards = (cards, voices, match, SYNTH, utterance) => {
 	return cards.map((card) => {
-		const Img = card.img
 		return (
 			<IonCard
 				onClick={() => {
@@ -51,7 +50,7 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 				<IonGrid>
 					<IonRow className="ion-align-items-center">
 						<IonCol size="4">
-							<Img size="9em" />
+							<IonIcon icon={card.img} style={{ fontSize: '130px' }} />
 						</IonCol>
 						<IonCol size="5" className="ion-text-center">
 							<strong>{toHindi(card.desc)}</strong>

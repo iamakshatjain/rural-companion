@@ -1,19 +1,22 @@
-import { GiCow, GiHealthNormal, GiOpenedFoodCan, GiVacuumCleaner } from 'react-icons/gi'
-import { FaBaby } from 'react-icons/fa'
-import { IoIosWoman } from 'react-icons/io'
+import Woman from '../assets/images/woman.svg'
+import Child from '../assets/images/child.svg'
+import Cattle from '../assets/images/cattle.svg'
+import Medicine from '../assets/images/medicine.svg'
+import Vegetables from '../assets/images/clubbed_veg.svg'
+import Soap from '../assets/images/soap.svg'
 
 export const categoryCards = [
 	{
-		img: IoIosWoman,
+		img: Woman,
 		desc: 'women'
 	},
 	{
-		img: FaBaby,
+		img: Child,
 		desc: 'children',
 		route: '/'
 	},
 	{
-		img: GiCow,
+		img: Cattle,
 		desc: 'cattle',
 		route: '/'
 	}
@@ -21,16 +24,16 @@ export const categoryCards = [
 
 export const informationCards = [
 	{
-		img: GiHealthNormal,
+		img: Medicine,
 		desc: 'disease',
 		route: ''
 	},
 	{
-		img: GiOpenedFoodCan,
+		img: Vegetables,
 		desc: 'nutrition'
 	},
 	{
-		img: GiVacuumCleaner,
+		img: Soap,
 		desc: 'hygiene'
 	}
 ]
