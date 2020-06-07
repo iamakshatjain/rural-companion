@@ -49,14 +49,14 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 				}}
 			>
 				<IonGrid>
-					<IonRow>
-						<IonCol>
+					<IonRow className="ion-align-items-center">
+						<IonCol size="4">
 							<Img size="9em" />
 						</IonCol>
-						{/* <IonCol>
-							<IonCardTitle>{toHindi(card.desc)}</IonCardTitle>
-						</IonCol> */}
-						<IonCol>
+						<IonCol size="5" className="ion-text-center">
+							<strong>{toHindi(card.desc)}</strong>
+						</IonCol>
+						<IonCol size="3">
 							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
 								{renderButton(card, SYNTH, utterance)}
 							</Link>

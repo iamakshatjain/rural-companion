@@ -16,37 +16,10 @@ export const categoryCards = [
 		img: GiCow,
 		desc: 'cattle',
 		route: '/'
-	},
-	{
-		img: IoIosWoman,
-		desc: 'women'
-	},
-	{
-		img: FaBaby,
-		desc: 'children',
-		route: '/'
-	},
-	{
-		img: GiCow,
-		desc: 'cattle',
-		route: '/'
 	}
 ]
 
 export const informationCards = [
-	{
-		img: GiHealthNormal,
-		desc: 'disease',
-		route: ''
-	},
-	{
-		img: GiOpenedFoodCan,
-		desc: 'nutrition'
-	},
-	{
-		img: GiVacuumCleaner,
-		desc: 'hygiene'
-	},
 	{
 		img: GiHealthNormal,
 		desc: 'disease',
