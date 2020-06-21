@@ -79,7 +79,8 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 // 	SYNTH.speak(utterance)
 // }
 
-const CardList = ({ cards, voices, match, initialiseVoice, SYNTH, utterance }) => {
+const CardList = ({ cards = null, voices = null, match, initialiseVoice, SYNTH, utterance, category, subCategory }) => {
+	console.log(category, subCategory)
 	// componentDidMount
 	useEffect(() => {
 		initialiseVoice()
@@ -112,10 +113,15 @@ const CardList = ({ cards, voices, match, initialiseVoice, SYNTH, utterance }) =
 }
 
 const mapStateToProps = (state) => {
-	const { SYNTH, utterance } = state.voice
+	const {
+		voice: { SYNTH, utterance },
+		display: { selectedCategory: category, selectedSubCategory: subCategory }
+	} = state
 	return {
 		SYNTH,
-		utterance
+		utterance,
+		category,
+		subCategory
 	}
 }
 
