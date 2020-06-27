@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useRef } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -74,6 +74,9 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
           utterance.text = instruction;
           SYNTH.speak(utterance);
         }}
+        // TODO : remove this hardcoding
+        // To prevent accessibility button overlap
+        style={{ marginBottom: index === cards.length - 1 ? "15vh" : "auto" }}
       >
         <IonGrid>
           <IonRow className="ion-align-items-center">
@@ -99,14 +102,22 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 };
 
 const CardList = ({ cards, voices, match, SYNTH, utterance, ...props }) => {
-  // componentDidMount
+  // componentWillMount
   useEffect(() => {
     props.initialiseVoice();
   }, []);
 
+  const instructionsList = Object.values(voices);
+  const instruction = instructionsList.join("।");
+  if (utterance) {
+    utterance.text = instruction;
+    SYNTH.speak(utterance);
+  }
+
   return (
     <Fragment>
-      <AccessibilityButton />
+      <AccessibilityButton instruction={instruction} />
+
       {/* if overscroll issue add style={{ '--padding-bottom': 'xrem' }} to the IonContent accordingly
 			to adjust the padding bottom so that list elements display correctly. Here it is not required as 
 			list is small. */}
