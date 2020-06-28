@@ -1,14 +1,15 @@
 import Woman from "./assets/images/woman.svg";
 import Child from "./assets/images/child.svg";
 import Cattle from "./assets/images/cattle.svg";
-import Vaccine from "./assets/images/vaccine.svg";
 import Vegetables from "./assets/images/clubbed_veg.svg";
 import Soap from "./assets/images/soap.svg";
+import Vaccine from "./assets/images/vaccine.svg";
+
 import Virus from "./assets/images/virus.svg";
 import Symptoms from "./assets/images/symptoms.svg";
 import Handwashing from "./assets/images/handwashing.svg";
 import Outdoor from "./assets/images/outdoor.svg";
-import OutdoorToIndoor from "./assets/images/outdoorToIndoor.svg";
+import OutdoorToIndoor from "./assets/images/outdoor_to_indoor.svg";
 import Indoor from "./assets/images/indoor.svg";
 
 export const categoryCards = [

@@ -55,19 +55,20 @@ const Info = (props) => {
     const informationType = [];
     let information = [];
 
-    // TODO : change later based on store variables
-    // informationType.push(category.toUpperCase());
-    // informationType.push(info.toUpperCase());
-    // information = Information[informationType.join("_")];
+    const {
+      match: {
+        params: { category, info },
+      },
+    } = props;
 
     // TODO : change later
     if (category === "virus") {
-      if (info === "symptoms" || info === "handwashing") {
+      if (["symptoms", "handwashing", "outdoor", "indoor"].includes(info)) {
         informationType.push(category.toUpperCase());
         informationType.push(info.toUpperCase());
         information = Information[informationType.join("_")];
       } else {
-        information = Information["VIRUS_SYMPTOMS"];
+        information = Information["VIRUS_OUTDOOR_TO_INDOOR"];
       }
     } else {
       information = Information["WOMEN_NUTRITION"];
@@ -81,10 +82,9 @@ const Info = (props) => {
     }, 1);
   }, []);
 
-  {
-    /* Don't put IonContent inside any parent element, otherwise it won't work. It should be at the root 
-		of the component. That's why use Fragment instead to render same level elements. */
-  }
+  // Don't put IonContent inside any parent element, otherwise it won't work. It should be at the root
+  // 	of the component. That's why use Fragment instead to render same level elements. *
+  //
 
   return (
     <Fragment>

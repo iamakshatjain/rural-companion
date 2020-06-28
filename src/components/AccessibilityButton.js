@@ -9,36 +9,41 @@ import {
 } from "../static-data/sentences";
 import { generateUserInstructions } from "../config/tts";
 
-function AccessibilityButton({ SYNTH, utterance }) {
-  return (
-    <Fragment>
-      <IonFab vertical="bottom" horizontal="end" style={{ margin: "1rem" }}>
-        <IonFabButton color="dark">
-          <IonIcon icon={helpOutline} />
-        </IonFabButton>
-        <IonFabList side="top">
-          <IonFabButton
-            onClick={() => {
-              SYNTH.cancel();
-              let sentences = Object.values(subCategorySentences);
-              let instruction = generateUserInstructions(sentences);
-              utterance.text = instruction;
-              SYNTH.speak(utterance);
-            }}
-          >
-            <IonIcon icon={reloadOutline} />
+// TODO : later this instruction to be stored in store
+class AccessibilityButton extends React.Component {
+  render() {
+    const { SYNTH, utterance, instruction } = this.props;
+
+    return (
+      <Fragment>
+        <IonFab vertical="bottom" horizontal="end" style={{ margin: "1rem" }}>
+          <IonFabButton color="dark">
+            <IonIcon icon={helpOutline} />
           </IonFabButton>
-          <IonFabButton
-            onClick={() => {
-              SYNTH.cancel();
-            }}
-          >
-            <IonIcon icon={pauseOutline} />
-          </IonFabButton>
-        </IonFabList>
-      </IonFab>
-    </Fragment>
-  );
+          <IonFabList side="top">
+            <IonFabButton
+              onClick={() => {
+                SYNTH.cancel();
+                // let sentences = Object.values(subCategorySentences);
+                // let instruction = generateUserInstructions(sentences);
+                utterance.text = instruction;
+                SYNTH.speak(utterance);
+              }}
+            >
+              <IonIcon icon={reloadOutline} />
+            </IonFabButton>
+            <IonFabButton
+              onClick={() => {
+                SYNTH.cancel();
+              }}
+            >
+              <IonIcon icon={pauseOutline} />
+            </IonFabButton>
+          </IonFabList>
+        </IonFab>
+      </Fragment>
+    );
+  }
 }
 
 const mapStateToProps = (state) => {

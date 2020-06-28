@@ -2,6 +2,10 @@ import Vegetables from "../static-data/assets/images/clubbed_veg.svg";
 import Fruits from "../static-data/assets/images/clubbed_fruits.svg";
 import Dairy from "../static-data/assets/images/milk.svg";
 import Water from "../static-data/assets/images/water.svg";
+import Medicine from "../static-data/assets/images/medicine.svg";
+import Sanitizer from "../static-data/assets/images/sanitizer.svg";
+
+import Symptoms from "../static-data/assets/images/symptoms.svg";
 import Breathing from "../static-data/assets/images/breathing.svg";
 import Fever from "../static-data/assets/images/fever.svg";
 import ChestPain from "../static-data/assets/images/chestPain.svg";
@@ -17,8 +21,44 @@ import HW_5 from "../static-data/assets/images/hw_5.svg";
 import HW_6 from "../static-data/assets/images/hw_6.svg";
 import HW_7 from "../static-data/assets/images/hw_7.svg";
 
-const WOMEN_NUTRITION = {
-  video_url: "https://youtu.be/StMCcxiRSL8",
+import Outdoor from "../static-data/assets/images/outdoor.svg";
+import AvoidCrowds from "../static-data/assets/images/avoid_crowds.svg";
+import Cashless from "../static-data/assets/images/cashless.svg";
+import CoverCough from "../static-data/assets/images/cover_cough.svg";
+import FaceMask from "../static-data/assets/images/face_mask.svg";
+import HandShake from "../static-data/assets/images/hand_shake.svg";
+import NoTouchFace from "../static-data/assets/images/no_touch_face.svg";
+import SocialDistance from "../static-data/assets/images/social_distance.svg";
+import WashHands from "../static-data/assets/images/wash_hands.svg";
+
+import Indoor from "../static-data/assets/images/indoor.svg";
+import BleachSpray from "../static-data/assets/images/bleach_spray.svg";
+import MobileSurface from "../static-data/assets/images/mobile_surface.svg";
+
+import OutdoorToIndoor from "../static-data/assets/images/outdoor_to_indoor.svg";
+import Bath from "../static-data/assets/images/bath.svg";
+import ClothesWash from "../static-data/assets/images/clothes_wash.svg";
+import UnnecessaryStuff from "../static-data/assets/images/unnecessary_stuff.svg";
+
+const titles = {
+  symptoms: "लक्षण",
+  handwashing: "हाथ धोना",
+  outdoor: "घर के बाहर",
+  outdoorToIndoor: "घर लौटते समय",
+  indoor: "घर के अंदर",
+};
+
+const videoUrls = {
+  womenNutrition: "https://youtu.be/StMCcxiRSL8",
+  symptoms: "https://youtu.be/8sAnmP_PaIA",
+  handwashing: "https://youtu.be/sRFkbw44MxA",
+  outdoor: "https://youtu.be/YJ0ybyKSgrw",
+  outdoorToIndoor: "https://youtu.be/fTfjSBaBtM8",
+  indoor: "https://youtu.be/g1b02X2xdgI",
+};
+
+export const WOMEN_NUTRITION = {
+  video_url: videoUrls.womenNutrition,
   data: [
     {
       title: "सब्जियां",
@@ -47,25 +87,20 @@ const WOMEN_NUTRITION = {
 
   recommendations: [
     {
-      URL: "https://www.youtube.com/watch?v=13cHnQ1Suj8",
-      icon: Vegetables,
-      title: "Recommended Video 1",
+      URL: videoUrls.womenNutrition,
+      icon: Medicine,
+      title: "रोग",
     },
     {
-      URL: "https://youtu.be/sRFkbw44MxA",
-      icon: Vegetables,
-      title: "Recommended Video 2",
-    },
-    {
-      URL: "https://www.youtube.com/watch?v=3qPgHJEtOHQ",
-      icon: Vegetables,
-      title: "Recommended Video 3",
+      URL: videoUrls.womenNutrition,
+      icon: Sanitizer,
+      title: "स्वच्छता",
     },
   ],
 };
 
 export const VIRUS_SYMPTOMS = {
-  video_url: "https://youtu.be/8sAnmP_PaIA",
+  video_url: videoUrls.symptoms,
   data: [
     {
       title: "बुखार",
@@ -106,25 +141,25 @@ export const VIRUS_SYMPTOMS = {
 
   recommendations: [
     {
-      URL: "https://www.youtube.com/watch?v=StMCcxiRSL8",
-      icon: Fever,
-      title: "Recommended Video 1",
+      URL: videoUrls.outdoor,
+      icon: Outdoor,
+      title: titles.outdoor,
     },
     {
-      URL: "https://www.youtube.com/watch?v=hMBKmQEPNzI",
-      icon: Fever,
-      title: "Recommended Video 2",
+      URL: videoUrls.indoor,
+      icon: Indoor,
+      title: titles.indoor,
     },
     {
-      URL: "https://www.youtube.com/watch?v=3qPgHJEtOHQ",
-      icon: Fever,
-      title: "Recommended Video 3",
+      URL: videoUrls.outdoorToIndoor,
+      icon: OutdoorToIndoor,
+      title: titles.outdoorToIndoor,
     },
   ],
 };
 
 export const VIRUS_HANDWASHING = {
-  video_url: "https://youtu.be/sRFkbw44MxA",
+  video_url: videoUrls.handwashing,
   data: [
     {
       title: "चरण १",
@@ -171,21 +206,192 @@ export const VIRUS_HANDWASHING = {
 
   recommendations: [
     {
-      URL: "https://youtu.be/8sAnmP_PaIA",
-      icon: Handwashing,
-      title: "Recommended Video 1",
+      URL: videoUrls.symptoms,
+      icon: Symptoms,
+      title: titles.symptoms,
     },
     {
-      URL: "https://youtu.be/8sAnmP_PaIA",
-      icon: Handwashing,
-      title: "Recommended Video 2",
+      URL: videoUrls.outdoorToIndoor,
+      icon: OutdoorToIndoor,
+      title: titles.outdoorToIndoor,
     },
     {
-      URL: "https://youtu.be/StMCcxiRSL8",
-      icon: Handwashing,
-      title: "Recommended Video 3",
+      URL: videoUrls.indoor,
+      icon: Indoor,
+      title: titles.indoor,
     },
   ],
 };
 
-export default { WOMEN_NUTRITION, VIRUS_SYMPTOMS, VIRUS_HANDWASHING };
+export const VIRUS_OUTDOOR = {
+  video_url: videoUrls.outdoor,
+  data: [
+    {
+      title: "हाथ धोना",
+      content:
+        "अपने हाथों को साबुन और पानी से बार-बार धोएं और कम से कम २० सेकंड तक रगड़ें अपने हाथों को साफ करने के लिए साबुन से हाथ धोना सबसे अच्छा तरीका है, या आप अल्कोहल आधारित सैनिटाइज़र का उपयोग भी कर सकते हैं",
+      image: WashHands,
+    },
+    {
+      title: "अपना चेहरा न छुएं",
+      image: NoTouchFace,
+      content:
+        "यह आसान लगता है, लेकिन करने के लिए कठिन है और सचेत प्रयास की आवश्यकता है आपके मुंह, आंखें, या नाक को छूने से आपके शरीर में प्रवेश करने के लिए वायरस की सीधी पहुंच हो सकती है",
+    },
+    {
+      title: "खांसी और छींक को ढकें",
+      image: CoverCough,
+      content:
+        "खांसी और छींक को अपनी कोहनी या ऊपरी बांह के अंदर से ढकें छींक या खांसी को ढंकने के लिए आप रूमाल या दुपट्टा का उपयोग भी कर सकते हैं",
+    },
+    {
+      title: "सामाजिक दूरी बनाए",
+      image: SocialDistance,
+      content:
+        "दूसरों से कम से कम ६ फीट की दूरी पर रहें\
+        यह सलाह दी जाती है क्योंकि खांसी या छींक से सांस की बूंदें ६ फीट तक की दूरी तय कर सकती हैं\
+        इसलिए दूर रहकर अपनी रक्षा करो",
+    },
+    {
+      title: "हाथ न मिलाएं",
+      image: HandShake,
+      content: "दूसरों को गले न लगाएं और दूसरे से हाथ न मिलाएं",
+    },
+    {
+      title: "मास्क से ढकें",
+      image: FaceMask,
+      content:
+        "अपने मुंह और नाक को मास्क या स्तरित कपड़े से उन जगहों पर ढकें, जहां सामाजिक दूरी को बनाए रखना मुश्किल हो\
+      ऐसा इसलिए है क्योंकि अब हम जानते हैं कि लक्षण विकसित होने से पहले ७२ घंटों के दौरान वायरस से संक्रमित लोग सबसे अधिक संक्रामक होते हैं",
+    },
+    {
+      title: "भीड़ में न जाएं",
+      image: AvoidCrowds,
+      content:
+        "भीड़ से बचने के लिए सचेत प्रयास करें\
+        विशेष रूप से इस समय में, सार्वजनिक या निजी समारोहों में न जाएं\
+        बस, ट्रेन या टैक्सी लेने के बजाय निजी वाहन से जाएं या पैदल जाने की कोशिश करें",
+    },
+    {
+      title: "नकद भुगतान से बचें",
+      image: Cashless,
+      content:
+        "नकद भुगतान से बचने की कोशिश करें\
+      क्योंकि कई लोगों द्वारा कागजी मुद्रा को स्पर्श किया जाता है और यह संक्रमित व्यक्ति से स्वस्थ व्यक्ति में वायरस को आसानी से स्थानांतरित कर सकता है\
+      अगर आप नोटों को छूते हैं तो उसके बाद चेहरे को न छुएं और अपने हाथों को अच्छे से धोएं",
+    },
+  ],
+
+  recommendations: [
+    {
+      URL: videoUrls.handwashing,
+      icon: Handwashing,
+      title: titles.handwashing,
+    },
+    {
+      URL: videoUrls.symptoms,
+      icon: Symptoms,
+      title: titles.symptoms,
+    },
+    {
+      URL: videoUrls.indoor,
+      icon: Indoor,
+      title: titles.indoor,
+    },
+  ],
+};
+
+export const VIRUS_INDOOR = {
+  video_url: videoUrls.indoor,
+  data: [
+    {
+      title: "सतहों को साफ रखें",
+      content:
+        "सतहों को साफ करने के लिए, सैनिटाइज़र या ब्लीच का उपयोग किया जा सकता है\
+				लेकिन पानी के साथ मिश्रित घरेलू ब्लीच का उपयोग करना बहुत ही किफायती है\
+				उल्लेख उन सतहों की सूची है जिन्हें आपको घर में साफ करना नहीं भूलना चाहिए\
+				फर्श, दरवाज़े के हैंडल, सीढ़ी की रेलिंग, फ्रिज और सोफे के लकड़ी के हिस्सों को ब्लीच और कपड़े से पोंछना चाहिए",
+      image: BleachSpray,
+    },
+    {
+      title: "अधिक छूई जाने वाली सतहें",
+      image: MobileSurface,
+      content:
+        "सबसे महत्वपूर्ण बात यह याद रखें कि आपका मोबाइल सबसे अधिक स्पर्श वाली सतहों में से है\
+				इसलिए नियमित समय अंतराल में मोबाइल कीटाणुरहित करें",
+    },
+  ],
+
+  recommendations: [
+    {
+      URL: videoUrls.symptoms,
+      icon: Symptoms,
+      title: titles.symptoms,
+    },
+    {
+      URL: videoUrls.outdoor,
+      icon: Outdoor,
+      title: titles.outdoor,
+    },
+    {
+      URL: videoUrls.outdoorToIndoor,
+      icon: OutdoorToIndoor,
+      title: titles.outdoorToIndoor,
+    },
+  ],
+};
+
+export const VIRUS_OUTDOOR_TO_INDOOR = {
+  video_url: videoUrls.outdoorToIndoor,
+  data: [
+    {
+      title: "स्नान करें",
+      content:
+        "जैसे ही आप बाहर से आते हैं, अपने हाथों को साबुन और पानी से धोएं या सैनिटाइज़र से साफ करें\
+				हाथ धोने के निर्देश ठीक से हाथ धोने वाले खंड में दिए गए हैं\
+				यदि संभव हो तो, घर में कुछ भी छूने से पहले स्नान करें",
+      image: Bath,
+    },
+    {
+      title: "आवश्यक सामान लाएं",
+      image: UnnecessaryStuff,
+      content:
+        "इन समयों में केवल आवश्यक सामान लाएं और यदि संभव हो तो उन्हें ब्लीच या सैनिटाइज़र के साथ कीटाणुरहित करें\
+				किसी भी अनावश्यक सामान को घर पर लाने से बचें",
+    },
+    {
+      title: "कपड़े धोएं",
+      image: ClothesWash,
+      content:
+        "यदि आप कई बार उपयोग किए जाने वाले मास्क पहन रहे हैं तो इसे बाहर से आने पर हर बार धोएं\
+				बाहर से आने के बाद अपने कपड़े धोना बहुत आवश्यक है",
+    },
+  ],
+
+  recommendations: [
+    {
+      URL: videoUrls.handwashing,
+      icon: Handwashing,
+      title: titles.handwashing,
+    },
+    {
+      URL: videoUrls.outdoor,
+      icon: Outdoor,
+      title: titles.outdoor,
+    },
+    {
+      URL: videoUrls.indoor,
+      icon: Indoor,
+      title: titles.indoor,
+    },
+  ],
+};
+
+export default {
+  WOMEN_NUTRITION,
+  VIRUS_SYMPTOMS,
+  VIRUS_HANDWASHING,
+  VIRUS_OUTDOOR,
+  VIRUS_INDOOR,
+  VIRUS_OUTDOOR_TO_INDOOR,
+};

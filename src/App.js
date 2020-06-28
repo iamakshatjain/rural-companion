@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
-import { IonApp, IonRouterOutlet } from '@ionic/react'
-import CardList from './components/CardList'
-import { IonReactRouter } from '@ionic/react-router'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
+import CardList from "./components/CardList";
+import { IonReactRouter } from "@ionic/react-router";
 
 // importing bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -92,7 +92,7 @@ const App = (props) => {
 };
 
 export default App;
-	
+
 //   const { category, subCategory } = props
 // 	return (
 // 		<IonApp overflow-scroll="true">
