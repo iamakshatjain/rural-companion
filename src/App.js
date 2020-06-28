@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
-import CardList from "./components/CardList";
-import { IonReactRouter } from "@ionic/react-router";
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
+import { IonApp, IonRouterOutlet } from '@ionic/react'
+import CardList from './components/CardList'
+import { IonReactRouter } from '@ionic/react-router'
 
 // importing bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -91,3 +92,32 @@ const App = (props) => {
 };
 
 export default App;
+	
+//   const { category, subCategory } = props
+// 	return (
+// 		<IonApp overflow-scroll="true">
+// 			{(!category || !subCategory) && <CardList />}
+// 			{category && subCategory && <Info />}
+// 			{/* <AccessibilityButton /> */}
+// 			{/* <IonReactRouter>
+// 				<IonRouterOutlet>
+// 					<Switch>
+// 						<Route path="/" component={CardList} exact />
+// 						<Route path="/:category" component={CardList} exact />
+// 						<Route path="/:category/:subcategory" component={Info} exact />
+// 					</Switch>
+// 				</IonRouterOutlet>
+// 			</IonReactRouter> */}
+// 		</IonApp>
+// 	)
+// }
+
+// const mapStateToProps = (state) => {
+// 	const { selectedCategory, selectedSubCategory } = state.display
+// 	return {
+// 		category: selectedCategory,
+// 		subCategory: selectedSubCategory
+// 	}
+// }
+
+// export default connect(mapStateToProps)(App)

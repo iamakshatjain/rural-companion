@@ -125,11 +125,16 @@ const CardList = ({
 };
 
 const mapStateToProps = (state) => {
-  const { SYNTH, utterance } = state.voice;
-  return {
-    SYNTH,
-    utterance,
-  };
-};
+	const {
+		voice: { SYNTH, utterance },
+		display: { selectedCategory: category, selectedSubCategory: subCategory }
+	} = state
+	return {
+		SYNTH,
+		utterance,
+		category,
+		subCategory
+	}
+}
 
 export default connect(mapStateToProps, { initialiseVoice })(CardList);
