@@ -107,6 +107,8 @@ coverage
 # Strapi
 ############################
 
+.env
 exports
 .cache
 build
+package-lock.json
