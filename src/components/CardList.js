@@ -1,26 +1,26 @@
-import React, { useEffect, Fragment, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react';
+import React, { useEffect, Fragment, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
 
-import AccessibilityButton from './AccessibilityButton';
-import { initialiseVoice } from '../actions';
+import AccessibilityButton from './AccessibilityButton'
+import { initialiseVoice } from '../actions'
 
 const renderButton = (index, SYNTH) => {
-	const colors = [ 'danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark' ];
+	const colors = ['danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark']
 
 	return (
 		<div style={{ color: 'white' }}>
 			<IonButton
-				color={`${colors[index]}`}
+				color={colors[index]}
 				size="large"
 				// onClick={() => SYNTH.cancel()}
 			>
 				&gt;
 			</IonButton>
 		</div>
-	);
-};
+	)
+}
 
 // temporary method
 const translateToHindi = (title) => {
@@ -37,14 +37,14 @@ const translateToHindi = (title) => {
 		outdoor: 'घर के बाहर',
 		outdoorToIndoor: 'घर लौटते समय',
 		indoor: 'घर के अंदर'
-	};
+	}
 
 	if (title in hindi) {
-		return hindi[title];
+		return hindi[title]
 	} else {
-		return title;
+		return title
 	}
-};
+}
 
 const renderCards = (cards, voices, match, SYNTH, utterance) => {
 	return cards.map((card, index) => {
@@ -63,31 +63,31 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 				<IonGrid>
 					<IonRow className="ion-align-items-center">
 						<IonCol size="4">
-							<IonIcon icon={card.img} style={{ fontSize: '100px' }} />
+							<IonIcon src={card.img_url} style={{ fontSize: '100px' }} />
 						</IonCol>
 						<IonCol size="5" className="ion-text-center">
-							<strong>{translateToHindi(card.desc)}</strong>
+							<strong>{translateToHindi(card.title)}</strong>
 						</IonCol>
 						<IonCol size="3">
-							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
+							<Link to={`${match.url}${card.title}/`} onClick={(e) => e.stopPropagation()}>
 								{renderButton(index, SYNTH)}
 							</Link>
 						</IonCol>
 					</IonRow>
 				</IonGrid>
 			</IonCard>
-		);
-	});
-};
+		)
+	})
+}
 
 const CardList = ({ cards, voices, match, SYNTH, utterance, ...props }) => {
 	// componentWillMount
 	useEffect(() => {
 		// props.initialiseVoice();
-	}, []);
+	}, [])
 
-	const instructionsList = Object.values(voices);
-	const instruction = instructionsList.join('।');
+	const instructionsList = Object.values(voices)
+	const instruction = instructionsList.join('।')
 	// if (utterance) {
 	// 	utterance.text = instruction;
 	// 	SYNTH.speak(utterance);
@@ -102,15 +102,15 @@ const CardList = ({ cards, voices, match, SYNTH, utterance, ...props }) => {
 			list is small. */}
 			<IonContent>{renderCards(cards, voices, match, SYNTH, utterance)}</IonContent>
 		</Fragment>
-	);
-};
+	)
+}
 
 const mapStateToProps = (state) => {
-	const { SYNTH, utterance } = state.voice;
+	const { SYNTH, utterance } = state.voice
 	return {
 		SYNTH,
 		utterance
-	};
-};
+	}
+}
 
-export default connect(mapStateToProps, { initialiseVoice })(CardList);
+export default connect(mapStateToProps, { initialiseVoice })(CardList)
