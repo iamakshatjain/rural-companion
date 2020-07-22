@@ -1,11 +1,3 @@
-import Woman from './assets/images/woman.svg'
-import Child from './assets/images/child.svg'
-import Cattle from './assets/images/cattle.svg'
-import Vegetables from './assets/images/clubbed_veg.svg'
-import Soap from './assets/images/soap.svg'
-import Vaccine from './assets/images/vaccine.svg'
-
-import Virus from './assets/images/virus.svg'
 import Symptoms from './assets/images/symptoms.svg'
 import Handwashing from './assets/images/handwashing.svg'
 import Outdoor from './assets/images/outdoor.svg'
@@ -14,57 +6,57 @@ import Indoor from './assets/images/indoor.svg'
 
 export const categoryCards = [
 	{
-		img: Woman,
-		desc: 'women'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595256209/woman.svg',
+		title: 'women'
 	},
 	{
-		img: Child,
-		desc: 'children'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257738/child.svg',
+		title: 'children'
 	},
 	{
-		img: Cattle,
-		desc: 'cattle'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257738/cattle.svg',
+		title: 'cattle'
 	},
 	{
-		img: Virus,
-		desc: 'virus'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257739/virus.svg',
+		title: 'virus'
 	}
 ]
 
 export const subCategoryCards = [
 	{
-		img: Vaccine,
-		desc: 'disease'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257981/vaccine.svg',
+		title: 'disease'
 	},
 	{
-		img: Vegetables,
-		desc: 'nutrition'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257981/clubbed_veg.svg',
+		title: 'nutrition'
 	},
 	{
-		img: Soap,
-		desc: 'hygiene'
+		img_url: 'https://res.cloudinary.com/dndf9znin/image/upload/v1595257981/soap.svg',
+		title: 'hygiene'
 	}
 ]
 
 export const virusCards = [
 	{
-		img: Symptoms,
-		desc: 'symptoms'
+		img_url: Symptoms,
+		title: 'symptoms'
 	},
 	{
-		img: Handwashing,
-		desc: 'handwashing'
+		img_url: Handwashing,
+		title: 'handwashing'
 	},
 	{
-		img: Outdoor,
-		desc: 'outdoor'
+		img_url: Outdoor,
+		title: 'outdoor'
 	},
 	{
-		img: OutdoorToIndoor,
-		desc: 'outdoorToIndoor'
+		img_url: OutdoorToIndoor,
+		title: 'outdoorToIndoor'
 	},
 	{
-		img: Indoor,
-		desc: 'indoor'
+		img_url: Indoor,
+		title: 'indoor'
 	}
 ]
