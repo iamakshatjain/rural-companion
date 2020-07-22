@@ -1,2 +1,2 @@
-export const INITIALISE_VOICE = 'INITIALISE_VOICE';
-export const SET_DEVICE = 'SET_DEVICE';
+export const SET_AUDIO_SRC = 'SET_AUDIO_SRC'
+export const SET_DEVICE = 'SET_DEVICE'

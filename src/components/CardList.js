@@ -1,13 +1,14 @@
-import React, { useEffect, Fragment, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react';
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
 
-import AccessibilityButton from './AccessibilityButton';
-import { initialiseVoice } from '../actions';
+import AccessibilityButton from './AccessibilityButton'
+import { setAudioSrc } from '../actions'
+import AudibleComponent from './AudibleComponent'
 
 const renderButton = (index, stop) => {
-	const colors = [ 'danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark' ];
+	const colors = ['danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark']
 
 	return (
 		<div style={{ color: 'white' }}>
@@ -15,8 +16,8 @@ const renderButton = (index, stop) => {
 				&gt;
 			</IonButton>
 		</div>
-	);
-};
+	)
+}
 
 // temporary method
 const translateToHindi = (title) => {
@@ -33,76 +34,75 @@ const translateToHindi = (title) => {
 		outdoor: 'घर के बाहर',
 		outdoorToIndoor: 'घर लौटते समय',
 		indoor: 'घर के अंदर'
-	};
+	}
 
 	if (title in hindi) {
-		return hindi[title];
+		return hindi[title]
 	} else {
-		return title;
+		return title
 	}
-};
+}
 
-const renderCards = (cards, match, play, stop, initialiseVoice) => {
+const renderCards = (cards, match, play, stop, setAudioSrc) => {
 	return cards.map((card, index) => {
 		return (
-			<IonCard
-				onClick={() => {
-					stop();
-					initialiseVoice(
-						'https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3'
-					);
-					play();
-				}}
-				// TODO : remove this hardcoding
-				// To prevent accessibility button overlap
-				style={{ marginBottom: index === cards.length - 1 ? '15vh' : 'auto' }}
-			>
-				<IonGrid>
-					<IonRow className="ion-align-items-center">
-						<IonCol size="4">
-							<IonIcon src={card.img_url} style={{ fontSize: '100px' }} />
-						</IonCol>
-						<IonCol size="5" className="ion-text-center">
-							<strong>{translateToHindi(card.title)}</strong>
-						</IonCol>
-						<IonCol size="3">
-							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
-								{renderButton(index, stop)}
-							</Link>
-						</IonCol>
-					</IonRow>
-				</IonGrid>
-			</IonCard>
-		);
-	});
-};
+			<AudibleComponent>
+				<IonCard
+					onClick={() => {
+						// stop()
+						// setAudioSrc('https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3')
+						// play()
+					}}
+					// TODO : remove this hardcoding
+					// To prevent accessibility button overlap
+					style={{ marginBottom: index === cards.length - 1 ? '15vh' : 'auto' }}
+				>
+					<IonGrid>
+						<IonRow className="ion-align-items-center">
+							<IonCol size="4">
+								<IonIcon src={card.img_url} style={{ fontSize: '100px' }} />
+							</IonCol>
+							<IonCol size="5" className="ion-text-center">
+								<strong>{translateToHindi(card.title)}</strong>
+							</IonCol>
 
-const CardList = ({ cards, match, play, stop, initialiseVoice, ...props }) => {
-	useEffect(
-		() => {
-			console.log('here');
+							<IonCol size="3">
+								<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
+									{renderButton(index, stop)}
+								</Link>
+							</IonCol>
+						</IonRow>
+					</IonGrid>
+				</IonCard>
+			</AudibleComponent>
+		)
+	})
+}
 
-			initialiseVoice(
-				'https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3'
-			);
-			play();
-		},
-		[ match.path ]
-	);
+const CardList = ({ cards, match, play, stop, setAudioSrc, ...props }) => {
+	// useEffect(() => {
+	// 	console.log('here')
+
+	// 	setAudioSrc('https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3')
+	// 	play()
+	// }, [match.path])
 
 	return (
 		<Fragment>
-			<AccessibilityButton play={play} stop={stop} />
-			<IonContent>{renderCards(cards, match, play, stop, initialiseVoice)}</IonContent>
+			{/* <AccessibilityButton play={play} stop={stop} /> */}
+			<IonContent>{renderCards(cards, match, play, stop, setAudioSrc)}</IonContent>
+			{/* <AudibleComponent>
+				<IonButton>Test me</IonButton>
+			</AudibleComponent> */}
 		</Fragment>
-	);
-};
+	)
+}
 
 const mapStateToProps = (state) => {
-	const { src } = state.audio;
+	const { src } = state.audio
 	return {
 		src
-	};
-};
+	}
+}
 
-export default connect(mapStateToProps, { initialiseVoice })(CardList);
+export default connect(mapStateToProps, { setAudioSrc })(CardList)
