@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import voiceReducer from './voiceReducer';
 import deviceReducer from './deviceReducer';
+import audioReducer from './audioReducer';
 
 export default combineReducers({
-	voice: voiceReducer,
-	device: deviceReducer
+	device: deviceReducer,
+	audio: audioReducer
 });

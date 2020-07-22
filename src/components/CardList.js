@@ -6,16 +6,12 @@ import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from
 import AccessibilityButton from './AccessibilityButton';
 import { initialiseVoice } from '../actions';
 
-const renderButton = (index, SYNTH) => {
+const renderButton = (index, stop) => {
 	const colors = [ 'danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark' ];
 
 	return (
 		<div style={{ color: 'white' }}>
-			<IonButton
-				color={`${colors[index]}`}
-				size="large"
-				// onClick={() => SYNTH.cancel()}
-			>
+			<IonButton color={`${colors[index]}`} size="large" onClick={() => stop()}>
 				&gt;
 			</IonButton>
 		</div>
@@ -46,16 +42,17 @@ const translateToHindi = (title) => {
 	}
 };
 
-const renderCards = (cards, voices, match, SYNTH, utterance) => {
+const renderCards = (cards, match, play, stop, initialiseVoice) => {
 	return cards.map((card, index) => {
 		return (
 			<IonCard
-				// onClick={() => {
-				// 	SYNTH.cancel();
-				// 	const instruction = voices[card.desc];
-				// 	utterance.text = instruction;
-				// 	SYNTH.speak(utterance);
-				// }}
+				onClick={() => {
+					stop();
+					initialiseVoice(
+						'https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3'
+					);
+					play();
+				}}
 				// TODO : remove this hardcoding
 				// To prevent accessibility button overlap
 				style={{ marginBottom: index === cards.length - 1 ? '15vh' : 'auto' }}
@@ -70,7 +67,7 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 						</IonCol>
 						<IonCol size="3">
 							<Link to={`${match.url}${card.desc}/`} onClick={(e) => e.stopPropagation()}>
-								{renderButton(index, SYNTH)}
+								{renderButton(index, stop)}
 							</Link>
 						</IonCol>
 					</IonRow>
@@ -80,36 +77,31 @@ const renderCards = (cards, voices, match, SYNTH, utterance) => {
 	});
 };
 
-const CardList = ({ cards, voices, match, SYNTH, utterance, ...props }) => {
-	// componentWillMount
-	useEffect(() => {
-		// props.initialiseVoice();
-	}, []);
+const CardList = ({ cards, match, play, stop, initialiseVoice, ...props }) => {
+	useEffect(
+		() => {
+			console.log('here');
 
-	const instructionsList = Object.values(voices);
-	const instruction = instructionsList.join('।');
-	// if (utterance) {
-	// 	utterance.text = instruction;
-	// 	SYNTH.speak(utterance);
-	// }
+			initialiseVoice(
+				'https://res.cloudinary.com/dndf9znin/video/upload/v1595261131/file_example_MP3_1MG_jvuy7w.mp3'
+			);
+			play();
+		},
+		[ match.path ]
+	);
 
 	return (
 		<Fragment>
-			<AccessibilityButton instruction={instruction} />
-
-			{/* if overscroll issue add style={{ '--padding-bottom': 'xrem' }} to the IonContent accordingly
-			to adjust the padding bottom so that list elements display correctly. Here it is not required as 
-			list is small. */}
-			<IonContent>{renderCards(cards, voices, match, SYNTH, utterance)}</IonContent>
+			<AccessibilityButton play={play} stop={stop} />
+			<IonContent>{renderCards(cards, match, play, stop, initialiseVoice)}</IonContent>
 		</Fragment>
 	);
 };
 
 const mapStateToProps = (state) => {
-	const { SYNTH, utterance } = state.voice;
+	const { src } = state.audio;
 	return {
-		SYNTH,
-		utterance
+		src
 	};
 };
 

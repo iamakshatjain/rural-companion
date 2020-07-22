@@ -1,9 +1,7 @@
 import { INITIALISE_VOICE, SET_DEVICE } from './types';
 
-export const initialiseVoice = () => {
-	return {
-		type: INITIALISE_VOICE
-	};
+export const initialiseVoice = (src) => (dispatch) => {
+	dispatch({ type: INITIALISE_VOICE, payload: src });
 };
 
 // set Device
