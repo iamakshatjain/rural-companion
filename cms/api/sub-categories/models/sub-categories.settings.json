@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sub_categories",
+  "info": {
+    "name": "subCategories"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "parent_category": {
+      "type": "string"
+    },
+    "data": {
+      "type": "json"
+    }
+  }
+}

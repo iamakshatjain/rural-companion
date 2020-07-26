@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "name": "categories"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "display_name": {
+      "type": "string"
+    },
+    "icon_url": {
+      "type": "string"
+    },
+    "voice_url": {
+      "type": "string"
+    },
+    "keyword": {
+      "type": "string"
+    }
+  }
+}

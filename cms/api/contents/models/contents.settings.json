@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contents",
+  "info": {
+    "name": "contents"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "keyword": {
+      "type": "string"
+    },
+    "video_url": {
+      "type": "string"
+    },
+    "data": {
+      "type": "json"
+    },
+    "recommendations": {
+      "type": "json"
+    }
+  }
+}
