@@ -46,7 +46,7 @@ const translateToHindi = (title) => {
 const renderCards = (cards, match, play, stop, setAudioSrc) => {
 	return cards.map((card, index) => {
 		return (
-			<AudibleComponent>
+			<AudibleComponent src="https://res.cloudinary.com/dndf9znin/video/upload/v1595749407/sounds/subcat_nutrition.mp3">
 				<IonCard
 					onClick={() => {
 						// stop()
