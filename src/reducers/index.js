@@ -1,8 +1,6 @@
-import { combineReducers } from 'redux';
-import deviceReducer from './deviceReducer';
-import audioReducer from './audioReducer';
+import { combineReducers } from 'redux'
+import deviceReducer from './deviceReducer'
 
 export default combineReducers({
-	device: deviceReducer,
-	audio: audioReducer
-});
+	device: deviceReducer
+})

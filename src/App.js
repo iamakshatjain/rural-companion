@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { IonApp, IonRouterOutlet } from '@ionic/react'
 import CardList from './components/CardList'
@@ -6,7 +6,8 @@ import { IonReactRouter } from '@ionic/react-router'
 import { connect } from 'react-redux'
 import { AudioPlayerProvider } from 'react-use-audio-player'
 
-import { setDevice, setAudioSrc } from './actions'
+import { setDevice } from './actions'
+
 // importing bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -30,26 +31,9 @@ import '@ionic/react/css/display.css'
 import './theme/variables.css'
 
 import Info from './components/Info'
-import { subCategoryCards, categoryCards, virusCards } from './static-data/cards'
 import { getDeviceInfo } from './helpers'
 
 const App = (props) => {
-	// const refContainer = useRef(null)
-
-	// const play = () => {
-	// 	setTimeout(() => {
-	// 		console.log(refContainer.current.src)
-
-	// 		refContainer.current.load()
-	// 		refContainer.current.play()
-	// 	}, 10)
-	// }
-
-	// const stop = () => {
-	// 	console.log('stop')
-	// 	refContainer.current.pause()
-	// }
-
 	useEffect(() => {
 		console.log('mount')
 		console.log('getting device info')
@@ -66,10 +50,15 @@ const App = (props) => {
 				<IonReactRouter>
 					<IonRouterOutlet>
 						<Switch>
-							<Route path="/virus" render={(props) => <CardList cards={virusCards} {...props} />} exact />
-							<Route path="/:category/:info" render={(props) => <Info {...props} />} exact />
-							<Route path="/:category" render={(props) => <CardList cards={subCategoryCards} {...props} />} exact />
-							<Route path="/" render={(props) => <CardList cards={categoryCards} {...props} />} exact />
+							<Route path="/" exact>
+								<CardList />
+							</Route>
+							<Route path="/:category" exact>
+								<CardList />
+							</Route>
+							<Route path="/:category/:subcategory" exact>
+								<Info />
+							</Route>
 						</Switch>
 					</IonRouterOutlet>
 				</IonReactRouter>
@@ -79,11 +68,9 @@ const App = (props) => {
 }
 
 const mapStateToProps = (state) => {
-	const { device, audio } = state
 	return {
-		device: device,
-		audio: audio
+		device: state.device
 	}
 }
 
-export default connect(mapStateToProps, { setDevice, setAudioSrc })(App)
+export default connect(mapStateToProps, { setDevice })(App)

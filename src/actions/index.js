@@ -1,8 +1,4 @@
-import { SET_AUDIO_SRC, SET_DEVICE } from './types'
-
-export const setAudioSrc = (src) => (dispatch) => {
-	dispatch({ type: SET_AUDIO_SRC, payload: src })
-}
+import { SET_DEVICE } from './types'
 
 // set Device
 export const setDevice = (data) => (dispatch) => {
