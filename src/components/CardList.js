@@ -1,30 +1,31 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
-import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react';
+import React, { Fragment, useState, useEffect, useRef } from 'react'
+import { Link, useParams, useLocation } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
+import SineWaves from 'sine-waves'
 
-import gmApi from '../apis/gmApi';
-import AccessibilityButton from './AccessibilityButton';
-import AudibleComponent from './AudibleComponent';
-import SineWaves from 'sine-waves';
+import gmApi from '../apis/gmApi'
+import { setAudioSrc } from '../actions'
+import AccessibilityButton from './AccessibilityButton'
 
-const colors = [ 'danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark' ];
+const colors = ['danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark']
 
-const CardList = () => {
-	const [ cards, setCards ] = useState([]);
-	const params = useParams();
-	const location = useLocation();
-	const refContainer = useRef();
+const CardList = (props) => {
+	const [cards, setCards] = useState([])
+	const params = useParams()
+	const location = useLocation()
+	const refContainer = useRef()
 
-	console.log(params);
+	console.log(params)
 
 	useEffect(() => {
-		const { category = null, subcategory = null } = params;
+		const { category = null, subcategory = null } = params
 		if (!category && !subcategory) {
 			gmApi.get('/categories').then((response) => {
-				setCards(response.data);
-			});
+				setCards(response.data)
+			})
 		}
-	}, []);
+	}, [])
 
 	const onStop = () => {
 		var waves = new SineWaves({
@@ -77,26 +78,26 @@ const CardList = () => {
 			],
 
 			// Called on window resize
-			resizeEvent: function() {
-				var gradient = this.ctx.createLinearGradient(0, 0, this.width, 0);
-				gradient.addColorStop(0, 'rgba(25, 255, 255, 0)');
-				gradient.addColorStop(0.5, 'rgba(255, 25, 255, 0.75)');
-				gradient.addColorStop(1, 'rgba(255, 255, 25, 0');
+			resizeEvent: function () {
+				var gradient = this.ctx.createLinearGradient(0, 0, this.width, 0)
+				gradient.addColorStop(0, 'rgba(25, 255, 255, 0)')
+				gradient.addColorStop(0.5, 'rgba(255, 25, 255, 0.75)')
+				gradient.addColorStop(1, 'rgba(255, 255, 25, 0')
 
-				var index = -1;
-				var length = this.waves.length;
+				var index = -1
+				var length = this.waves.length
 				while (++index < length) {
-					this.waves[index].strokeStyle = gradient;
+					this.waves[index].strokeStyle = gradient
 				}
 
 				// Clean Up
-				index = void 0;
-				length = void 0;
-				gradient = void 0;
+				index = void 0
+				length = void 0
+				gradient = void 0
 			}
-		});
-		console.log(waves.ctx);
-	};
+		})
+		console.log(waves.ctx)
+	}
 
 	const onStart = () => {
 		var waves = new SineWaves({
@@ -149,63 +150,61 @@ const CardList = () => {
 			],
 
 			// Called on window resize
-			resizeEvent: function() {
-				var gradient = this.ctx.createLinearGradient(0, 0, this.width, 0);
-				gradient.addColorStop(0, 'rgba(25, 255, 255, 0)');
-				gradient.addColorStop(0.5, 'rgba(255, 25, 255, 0.75)');
-				gradient.addColorStop(1, 'rgba(255, 255, 25, 0');
+			resizeEvent: function () {
+				var gradient = this.ctx.createLinearGradient(0, 0, this.width, 0)
+				gradient.addColorStop(0, 'rgba(25, 255, 255, 0)')
+				gradient.addColorStop(0.5, 'rgba(255, 25, 255, 0.75)')
+				gradient.addColorStop(1, 'rgba(255, 255, 25, 0')
 
-				var index = -1;
-				var length = this.waves.length;
+				var index = -1
+				var length = this.waves.length
 				while (++index < length) {
-					this.waves[index].strokeStyle = gradient;
+					this.waves[index].strokeStyle = gradient
 				}
 
 				// Clean Up
-				index = void 0;
-				length = void 0;
-				gradient = void 0;
+				index = void 0
+				length = void 0
+				gradient = void 0
 			}
-		});
-		console.log(waves.ctx);
-	};
+		})
+		console.log(waves.ctx)
+	}
 
 	return (
 		<Fragment>
 			{/* <AccessibilityButton /> */}
 			<IonContent>
 				{cards.map((card, index) => (
-					<AudibleComponent src={card.voice_url}>
-						<IonCard
-							// TODO : remove this hardcoding
-							// To prevent accessibility button overlap
-							style={{ marginBottom: index === cards.length - 1 ? '15vh' : 'auto' }}
-						>
-							<IonGrid>
-								<IonRow className="ion-align-items-center">
-									<IonCol size="4">
-										<IonIcon src={card.icon_url} style={{ fontSize: '100px' }} />
-									</IonCol>
-									<IonCol size="5" className="ion-text-center">
-										<strong>{card.display_name}</strong>
-									</IonCol>
-									<IonCol size="3">
-										<Link
-											to={`${location.pathname}/${card.keyword}/`}
-											onClick={(e) => e.stopPropagation()}
-										>
-											<div style={{ color: 'white' }}>
-												<IonButton color={`${colors[index]}`} size="large">
-													&gt;
-												</IonButton>
-											</div>
-										</Link>
-									</IonCol>
-								</IonRow>
-							</IonGrid>
-						</IonCard>
-					</AudibleComponent>
+					<IonCard
+						key={index}
+						onClick={() => props.setAudioSrc(card.voice_url)}
+						// TODO : remove this hardcoding
+						// To prevent accessibility button overlap
+						style={{ marginBottom: index === cards.length - 1 ? '15vh' : 'auto' }}
+					>
+						<IonGrid>
+							<IonRow className="ion-align-items-center">
+								<IonCol size="4">
+									<IonIcon src={card.icon_url} style={{ fontSize: '100px' }} />
+								</IonCol>
+								<IonCol size="5" className="ion-text-center">
+									<strong>{card.display_name}</strong>
+								</IonCol>
+								<IonCol size="3">
+									<Link to={`${location.pathname}/${card.keyword}/`} onClick={(e) => e.stopPropagation()}>
+										<div style={{ color: 'white' }}>
+											<IonButton color={`${colors[index]}`} size="large">
+												&gt;
+											</IonButton>
+										</div>
+									</Link>
+								</IonCol>
+							</IonRow>
+						</IonGrid>
+					</IonCard>
 				))}
+
 				<div className="container">
 					<button onClick={onStart}>Start</button>
 					<button onClick={onStop}>Stop</button>
@@ -213,7 +212,7 @@ const CardList = () => {
 				</div>
 			</IonContent>
 		</Fragment>
-	);
-};
+	)
+}
 
-export default CardList;
+export default connect(null, { setAudioSrc })(CardList)
