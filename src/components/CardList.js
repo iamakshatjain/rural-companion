@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link, useParams, useRouteMatch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { IonIcon, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent } from '@ionic/react'
 import SineWaves from 'sine-waves'
@@ -7,13 +7,14 @@ import SineWaves from 'sine-waves'
 import gmApi from '../apis/gmApi'
 import { setAudioSrc } from '../actions'
 import AccessibilityButton from './AccessibilityButton'
+import { categoryCards } from '../static-data/cards'
 
 const colors = ['danger', 'success', 'primary', 'warning', 'secondary', 'tertiary', 'light', 'medium', 'dark']
 
 const CardList = (props) => {
 	const [cards, setCards] = useState([])
 	const params = useParams()
-	const location = useLocation()
+	const match = useRouteMatch()
 	const refContainer = useRef()
 
 	console.log(params)
@@ -24,8 +25,12 @@ const CardList = (props) => {
 			gmApi.get('/categories').then((response) => {
 				setCards(response.data)
 			})
+		} else if (!subcategory) {
+			gmApi.get(`/sub-categories?parent_category=${category}`).then((response) => {
+				setCards(response.data[0].data)
+			})
 		}
-	}, [])
+	}, [params])
 
 	const onStop = () => {
 		var waves = new SineWaves({
@@ -192,7 +197,7 @@ const CardList = (props) => {
 									<strong>{card.display_name}</strong>
 								</IonCol>
 								<IonCol size="3">
-									<Link to={`${location.pathname}/${card.keyword}/`} onClick={(e) => e.stopPropagation()}>
+									<Link to={`/${card.keyword}`} onClick={(e) => e.stopPropagation()}>
 										<div style={{ color: 'white' }}>
 											<IonButton color={`${colors[index]}`} size="large">
 												&gt;
