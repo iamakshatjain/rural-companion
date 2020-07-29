@@ -11,12 +11,21 @@ const AudibleComponent = ({ src }) => {
 		autoplay: true
 	});
 	const refContainer = useRef();
-	useEffect(() => {
-		console.log('use effect');
-		setTimeout(() => {
-			onStop();
-		}, 100);
-	}, []);
+	useEffect(
+		() => {
+			console.log('here playing : ' + playing);
+			if (!playing) {
+				setTimeout(() => {
+					onStop();
+				}, 100);
+			} else {
+				setTimeout(() => {
+					onStart();
+				}, 100);
+			}
+		},
+		[ playing ]
+	);
 	const onStop = () => {
 		var waves = new SineWaves({
 			// Canvas Element
@@ -158,9 +167,9 @@ const AudibleComponent = ({ src }) => {
 				gradient = void 0;
 			}
 		});
-		console.log(waves.ctx);
+		console.log(refContainer.current);
 	};
-	return <canvas className="waves" ref={refContainer} />;
+	return <canvas className="waves" ref={refContainer} onClick={togglePlayPause} />;
 };
 
 const mapStateToProps = (state) => {
