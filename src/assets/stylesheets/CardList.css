@@ -1,0 +1,29 @@
+.cardlist {
+	height: 92vh;
+	overflow-y: scroll;
+}
+.cardlist::-webkit-scrollbar {
+	display: none;
+}
+.cardlist {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.card-icon {
+	font-size: 100px;
+}
+
+.card-button {
+	color: #ffffff;
+}
+
+.bottom-bar {
+	height: 8vh;
+}
+
+canvas {
+	width: 70%;
+	margin-left: 15%;
+	height: 100%;
+}
