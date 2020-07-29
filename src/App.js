@@ -35,40 +35,34 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App = (props) => {
-	useEffect(() => {
-		console.log('mount');
-		console.log('getting device info');
-		getDeviceInfo().then((dev) => {
-			console.log(`on : ${dev.platform}`);
-			props.setDevice(dev.platform);
-		});
-	}, []);
+  useEffect(() => {
+    console.log('mount');
+    console.log('getting device info');
+    getDeviceInfo().then((dev) => {
+      console.log(`on : ${dev.platform}`);
+      props.setDevice(dev.platform);
+    });
+  }, []);
 
-	return (
-		<AudioPlayerProvider>
-			<IonApp overflow-scroll="true">
-				<IonReactRouter>
-					<IonRouterOutlet>
-						<Route path="/" exact>
-							<CardList />
-						</Route>
-						<Route path="/:category" exact>
-							<CardList />
-						</Route>
-						<Route path="/:category/:subcategory" exact>
-							<Info />
-						</Route>
-					</IonRouterOutlet>
-				</IonReactRouter>
-			</IonApp>
-		</AudioPlayerProvider>
-	);
+  return (
+    <AudioPlayerProvider>
+      <IonApp overflow-scroll='true'>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route path='/' exact component={CardList} />
+            <Route path='/:category' exact component={CardList} />
+            <Route path='/:category/:subcategory' exact component={Info} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </IonApp>
+    </AudioPlayerProvider>
+  );
 };
 
 const mapStateToProps = (state) => {
-	return {
-		device: state.device
-	};
+  return {
+    device: state.device,
+  };
 };
 
 export default connect(mapStateToProps, { setDevice })(App);

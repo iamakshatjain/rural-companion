@@ -31,8 +31,7 @@
 		"redux": "^4.0.5",
 		"redux-thunk": "^2.3.0",
 		"sine-waves": "^0.3.0",
-		"typescript": "3.8.3",
-		"uninstall": "0.0.0"
+		"typescript": "^3.9.7"
 	},
 	"scripts": {
 		"start": "react-scripts start",
