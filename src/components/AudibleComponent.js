@@ -17,11 +17,11 @@ const AudibleComponent = ({ src }) => {
 			if (!playing) {
 				setTimeout(() => {
 					onStop();
-				}, 200);
+				}, 1000);
 			} else {
 				setTimeout(() => {
 					onStart();
-				}, 200);
+				}, 1000);
 			}
 		},
 		[ playing ]
