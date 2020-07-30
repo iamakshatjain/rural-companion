@@ -1,10 +1,33 @@
-import React from 'react'
-import ReactPlayer from 'react-player/youtube'
+import React from 'react';
+import ReactPlayer from 'react-player/youtube';
 
-import '../static-data/assets/stylesheets/VideoPlayer.css'
+import '../static-data/assets/stylesheets/VideoPlayer.css';
 
-const VideoPlayer = ({ url }) => {
-	return <ReactPlayer url={url} className="react-player" width="100%" height="100%" playing controls />
-}
+const { forwardRef, useRef, useImperativeHandle } = React;
 
-export default VideoPlayer
+const VideoPlayer = forwardRef(({ url }, ref) => {
+  const player = useRef(null);
+  useImperativeHandle(
+    ref,
+    () => ({
+      fastForward(seconds) {
+        player.current.seekTo(parseFloat(seconds), 'seconds');
+      },
+    }),
+    [player]
+  );
+
+  return (
+    <ReactPlayer
+      ref={player}
+      url={url}
+      className='react-player'
+      width='100%'
+      height='100%'
+      playing
+      controls
+    />
+  );
+});
+
+export default VideoPlayer;
