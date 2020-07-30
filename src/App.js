@@ -35,16 +35,15 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App = (props) => {
-  useEffect(() => {
-    console.log('mount');
-    console.log('getting device info');
-    getDeviceInfo().then((dev) => {
-      console.log(`on : ${dev.platform}`);
-      props.setDevice(dev.platform);
-    });
-  }, []);
+	useEffect(() => {
+		console.log('mount');
+		console.log('getting device info');
+		getDeviceInfo().then((dev) => {
+			console.log(`on : ${dev.platform}`);
+			props.setDevice(dev.platform);
+		});
+	}, []);
 
-<<<<<<< HEAD
 	return (
 		<AudioPlayerProvider>
 			<IonApp overflow-scroll="true">
@@ -66,27 +65,12 @@ const App = (props) => {
 			</IonApp>
 		</AudioPlayerProvider>
 	);
-=======
-  return (
-    <AudioPlayerProvider>
-      <IonApp overflow-scroll='true'>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path='/' exact component={CardList} />
-            <Route path='/:category' exact component={CardList} />
-            <Route path='/:category/:subcategory' exact component={Info} />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </IonApp>
-    </AudioPlayerProvider>
-  );
->>>>>>> 82d4b031a4ea44e163325569a7bb011e940650b0
 };
 
 const mapStateToProps = (state) => {
-  return {
-    device: state.device,
-  };
+	return {
+		device: state.device
+	};
 };
 
 export default connect(mapStateToProps, { setDevice })(App);
