@@ -15,7 +15,15 @@ const AudibleComponent = ({ src }) => {
 	if (!playing) {
 		return (
 			<div className="play" onClick={togglePlayPause}>
-				<IonIcon icon={playOutline} />
+				<hr
+					style={{
+						border: 0,
+						height: '2px',
+						backgroundImage: 'linear-gradient(to right, #009fff, #ec2f4b)',
+						width: '70%'
+					}}
+				/>
+				{/* <IonIcon icon={playOutline} /> */}
 			</div>
 		);
 	} else {

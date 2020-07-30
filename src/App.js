@@ -49,15 +49,17 @@ const App = (props) => {
 			<IonApp overflow-scroll="true">
 				<IonReactRouter>
 					<IonRouterOutlet>
-						<Route path="/" exact>
-							<CardList />
-						</Route>
-						<Route path="/:category" exact>
-							<CardList />
-						</Route>
-						<Route path="/:category/:subcategory" exact>
-							<Info />
-						</Route>
+						<Switch>
+							<Route path="/" exact>
+								<CardList />
+							</Route>
+							<Route path="/:category" exact>
+								<CardList />
+							</Route>
+							<Route path="/:category/:subcategory" exact>
+								<Info />
+							</Route>
+						</Switch>
 					</IonRouterOutlet>
 				</IonReactRouter>
 			</IonApp>
