@@ -29,24 +29,23 @@ const colors = [
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
 
+  const {
+    match: {
+      params: { category = '', subcategory = '' }
+    }
+  } = props;
+
   useEffect(() => {
-    const {
-      match: {
-        params: { category = null, subcategory = null }
-      }
-    } = props;
     if (!category && !subcategory) {
       gmApi.get('/categories').then((response) => {
         setCards(response.data);
       });
     } else if (!subcategory) {
-      gmApi
-        .get(`/sub-categories?parent_category=${category}`)
-        .then((response) => {
-          setCards(response.data[0].data);
-        });
+      gmApi.get(`/sub-categories?category=${category}`).then((response) => {
+        setCards(response.data[0].data);
+      });
     }
-  }, [props]);
+  }, [category, subcategory]);
 
   return (
     <div>
@@ -68,7 +67,7 @@ const CardList = (props) => {
                 </IonCol>
                 <IonCol size="3">
                   <Link
-                    to={`/${card.keyword}`}
+                    to={`${category}/${card.keyword}`}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <div className="card-button">

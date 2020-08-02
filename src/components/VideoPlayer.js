@@ -12,7 +12,7 @@ const VideoPlayer = forwardRef(({ url }, ref) => {
     () => ({
       fastForward(seconds) {
         player.current.seekTo(parseFloat(seconds), 'seconds');
-      },
+      }
     }),
     [player]
   );
@@ -21,9 +21,9 @@ const VideoPlayer = forwardRef(({ url }, ref) => {
     <ReactPlayer
       ref={player}
       url={url}
-      className='react-player'
-      width='100%'
-      height='100%'
+      className="react-player"
+      width="100%"
+      height="100%"
       playing
       controls
     />
