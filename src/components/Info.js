@@ -1,8 +1,5 @@
-import React, { Fragment } from 'react';
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-
-import VideoPlayer from './VideoPlayer';
+import React, { useState, useEffect, useRef } from 'react';
+// import axios from 'axios';
 import {
   IonCardHeader,
   IonCardTitle,
@@ -17,29 +14,29 @@ import {
   IonItem,
   IonListHeader,
   IonLabel,
-  IonThumbnail,
+  IonThumbnail
 } from '@ionic/react';
+import VideoPlayer from './VideoPlayer';
+import cms from '../apis';
 
-const createIonCard = (icon, title, content, onClick) => {
-  return (
-    <IonCard key={icon} onClick={onClick} style={{ cursor: 'pointer' }}>
-      <IonGrid>
-        <IonRow>
-          <IonCol size='2'>
-            <IonIcon icon={icon} style={{ fontSize: '90px' }} />
-          </IonCol>
-          <IonCol size='1' />
-          <IonCol size='8'>
-            <IonCardHeader>
-              <IonCardTitle>{title}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>{content}</IonCardContent>
-          </IonCol>
-        </IonRow>
-      </IonGrid>
-    </IonCard>
-  );
-};
+const createIonCard = (icon, title, content, onClick) => (
+  <IonCard key={icon} onClick={onClick} style={{ cursor: 'pointer' }}>
+    <IonGrid>
+      <IonRow>
+        <IonCol size="2">
+          <IonIcon icon={icon} style={{ fontSize: '90px' }} />
+        </IonCol>
+        <IonCol size="1" />
+        <IonCol size="8">
+          <IonCardHeader>
+            <IonCardTitle>{title}</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>{content}</IonCardContent>
+        </IonCol>
+      </IonRow>
+    </IonGrid>
+  </IonCard>
+);
 
 const Info = (props) => {
   const [playerHeight, setPlayerHeight] = useState(0);
@@ -54,18 +51,18 @@ const Info = (props) => {
   useEffect(() => {
     const {
       match: {
-        params: { category, subcategory },
-      },
+        params: { category, subcategory }
+      }
     } = props;
 
     const keyword = `${category.toUpperCase()}_${subcategory.toUpperCase()}`;
     // TODO : refactor this later to environment variables
-    const baseApiUri = 'https://gramin-mitra-cms.herokuapp.com';
-    axios
-      .get(`${baseApiUri}/contents`, {
+    // const baseApiUri = 'https://gramin-mitra-cms.herokuapp.com';
+    cms
+      .get('/contents', {
         params: {
-          keyword,
-        },
+          keyword
+        }
       })
       .then((res) => {
         const information = res.data[0];
@@ -94,7 +91,7 @@ const Info = (props) => {
   const isLoaderVisible = isLoading || !data.length;
 
   return isLoaderVisible ? (
-    <Fragment>
+    <>
       <IonList style={{ padding: '0' }}>
         <IonListHeader style={{ padding: '0' }}>
           <IonLabel style={{ margin: '0' }}>
@@ -105,7 +102,7 @@ const Info = (props) => {
           </IonLabel>
         </IonListHeader>
         <IonItem>
-          <IonThumbnail slot='start'>
+          <IonThumbnail slot="start">
             <IonSkeletonText animated />
           </IonThumbnail>
           <IonLabel>
@@ -121,7 +118,7 @@ const Info = (props) => {
           </IonLabel>
         </IonItem>
         <IonItem>
-          <IonThumbnail slot='start'>
+          <IonThumbnail slot="start">
             <IonSkeletonText animated />
           </IonThumbnail>
           <IonLabel>
@@ -137,7 +134,7 @@ const Info = (props) => {
           </IonLabel>
         </IonItem>
         <IonItem>
-          <IonThumbnail slot='start'>
+          <IonThumbnail slot="start">
             <IonSkeletonText animated />
           </IonThumbnail>
           <IonLabel>
@@ -159,11 +156,11 @@ const Info = (props) => {
           style={{
             margin: '20px',
             height: '2.5rem',
-            width: '70%',
+            width: '70%'
           }}
         />
         <IonItem>
-          <IonThumbnail slot='start'>
+          <IonThumbnail slot="start">
             <IonSkeletonText animated />
           </IonThumbnail>
           <IonLabel>
@@ -179,7 +176,7 @@ const Info = (props) => {
           </IonLabel>
         </IonItem>
         <IonItem>
-          <IonThumbnail slot='start'>
+          <IonThumbnail slot="start">
             <IonSkeletonText animated />
           </IonThumbnail>
           <IonLabel>
@@ -195,17 +192,17 @@ const Info = (props) => {
           </IonLabel>
         </IonItem>
       </IonList>
-    </Fragment>
+    </>
   ) : (
-    <Fragment>
-      <div className='player-wrapper' ref={ref}>
+    <>
+      <div className="player-wrapper" ref={ref}>
         <VideoPlayer url={URL} ref={player} />
       </div>
 
       <div
         style={{
           height: window.innerHeight - playerHeight,
-          overflowY: 'scroll',
+          overflowY: 'scroll'
         }}
       >
         <IonList>
@@ -214,7 +211,7 @@ const Info = (props) => {
               image_url: image,
               display_name: title,
               content,
-              timeStamp = 0,
+              timeStamp = 0
             }) =>
               createIonCard(image, title, content, () => {
                 player.current.fastForward(timeStamp);
@@ -225,7 +222,7 @@ const Info = (props) => {
         <h1
           style={{
             paddingLeft: '20px',
-            fontSize: '2.5rem',
+            fontSize: '2.5rem'
           }}
         >
           अन्य वीडियो
@@ -234,15 +231,15 @@ const Info = (props) => {
         {/* recommendations */}
         <div>
           <IonList>
-            {recommendations.map(({ icon, title, content, URL }) =>
+            {recommendations.map(({ icon, title, content, videoURL }) =>
               createIonCard(icon, title, content, () => {
-                setURL(URL);
+                setURL(videoURL);
               })
             )}
           </IonList>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

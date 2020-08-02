@@ -10,10 +10,9 @@ import { getDeviceInfo } from './helpers';
 
 import CardList from './components/CardList';
 import Info from './components/Info';
-import AudibleComponent from './components/AudibleComponent';
 
 // importing bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,17 +41,17 @@ const App = (props) => {
       console.log(`on : ${dev.platform}`);
       props.setDevice(dev.platform);
     });
-  }, []);
+  }, [props]);
 
   return (
     <AudioPlayerProvider>
-      <IonApp overflow-scroll='true'>
+      <IonApp overflow-scroll="true">
         <IonReactRouter>
           <IonRouterOutlet>
             <Switch>
-              <Route path='/' exact component={CardList} />
-              <Route path='/:category' exact component={CardList} />
-              <Route path='/:category/:subcategory' exact component={Info} />
+              <Route path="/" exact component={CardList} />
+              <Route path="/:category" exact component={CardList} />
+              <Route path="/:category/:subcategory" exact component={Info} />
             </Switch>
           </IonRouterOutlet>
         </IonReactRouter>
@@ -61,10 +60,8 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    device: state.device,
-  };
-};
+const mapStateToProps = (state) => ({
+  device: state.device
+});
 
 export default connect(mapStateToProps, { setDevice })(App);

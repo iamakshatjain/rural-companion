@@ -1,21 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   IonIcon,
   IonButton,
   IonCard,
   IonGrid,
   IonRow,
-  IonCol,
-  IonContent
+  IonCol
 } from '@ionic/react';
-import gmApi from '../apis/gmApi';
+import gmApi from '../apis';
 import { setAudioSrc } from '../actions';
-import AccessibilityButton from './AccessibilityButton';
 import AudibleComponent from './AudibleComponent';
-import { categoryCards } from '../static-data/cards';
-import SineWaves from 'sine-waves';
 import '../assets/stylesheets/CardList.css';
 
 const colors = [
@@ -32,12 +28,13 @@ const colors = [
 
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
-  const params = useParams();
-  const match = useRouteMatch();
-  const refContainer = useRef();
 
   useEffect(() => {
-    const { category = null, subcategory = null } = params;
+    const {
+      match: {
+        params: { category = null, subcategory = null }
+      }
+    } = props;
     if (!category && !subcategory) {
       gmApi.get('/categories').then((response) => {
         setCards(response.data);
@@ -49,7 +46,7 @@ const CardList = (props) => {
           setCards(response.data[0].data);
         });
     }
-  }, [params]);
+  }, [props]);
 
   return (
     <div>
