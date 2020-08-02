@@ -9,7 +9,7 @@
     "timestamps": true
   },
   "attributes": {
-    "parent_category": {
+    "category": {
       "type": "string"
     },
     "data": {

@@ -9,9 +9,6 @@
     "timestamps": true
   },
   "attributes": {
-    "keyword": {
-      "type": "string"
-    },
     "video_url": {
       "type": "string"
     },
@@ -20,6 +17,12 @@
     },
     "recommendations": {
       "type": "json"
+    },
+    "category": {
+      "type": "string"
+    },
+    "subcategory": {
+      "type": "string"
     }
   }
 }
