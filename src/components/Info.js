@@ -55,13 +55,11 @@ const Info = (props) => {
       }
     } = props;
 
-    const keyword = `${category.toUpperCase()}_${subcategory.toUpperCase()}`;
-    // TODO : refactor this later to environment variables
-    // const baseApiUri = 'https://gramin-mitra-cms.herokuapp.com';
     cms
       .get('/contents', {
         params: {
-          keyword
+          category: category.toUpperCase(),
+          subcategory: subcategory.toUpperCase()
         }
       })
       .then((res) => {
@@ -231,10 +229,16 @@ const Info = (props) => {
         {/* recommendations */}
         <div>
           <IonList>
-            {recommendations.map(({ icon, title, content, videoURL }) =>
-              createIonCard(icon, title, content, () => {
-                setURL(videoURL);
-              })
+            {recommendations.map(
+              ({
+                icon_url: icon,
+                display_name: title,
+                content,
+                video_url: video
+              }) =>
+                createIonCard(icon, title, content, () => {
+                  setURL(video);
+                })
             )}
           </IonList>
         </div>

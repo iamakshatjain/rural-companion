@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://gramin-mitra-cms.herokuapp.com/'
+  baseURL: 'https://gramin-mitra-strapi-cms.herokuapp.com/'
 });
