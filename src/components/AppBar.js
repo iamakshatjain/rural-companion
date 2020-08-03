@@ -1,33 +1,28 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonButton,
-  IonIcon,
-  IonMenuButton,
-  IonSearchbar,
-  IonSegment,
-  IonSegmentButton
+  IonIcon
 } from '@ionic/react';
-import { volumeHigh, volumeMute } from 'ionicons/icons';
+import { volumeHigh, volumeMute, arrowBackOutline } from 'ionicons/icons';
 
-const AppBar = ({ history }) => {
-  // console.log(history);
+const AppBar = () => {
+  const history = useHistory();
   const [isMuted, setIsMuted] = useState(false);
+
   return (
     <IonToolbar>
       <IonButtons slot="start">
-        <IonBackButton defaultHref="/" />
+        <IonButton onClick={() => history.goBack()}>
+          <IonIcon slot="icon-only" icon={arrowBackOutline} />
+        </IonButton>
       </IonButtons>
       <IonTitle>Gramin Mitra</IonTitle>
       <IonButtons slot="end">
-        <IonButton
-          onClick={() => {
-            setIsMuted(!isMuted);
-          }}
-        >
+        <IonButton onClick={() => setIsMuted(!isMuted)}>
           <IonIcon slot="icon-only" icon={!isMuted ? volumeHigh : volumeMute} />
         </IonButton>
       </IonButtons>

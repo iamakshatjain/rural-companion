@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import {
   IonCardHeader,
   IonCardTitle,
@@ -38,7 +38,7 @@ const createIonCard = (icon, title, content, onClick) => (
   </IonCard>
 );
 
-const Info = (props) => {
+const Info = () => {
   const [playerHeight, setPlayerHeight] = useState(0);
 
   const [URL, setURL] = useState('');
@@ -48,13 +48,9 @@ const Info = (props) => {
   const ref = useRef(null);
   const player = useRef(null);
 
-  useEffect(() => {
-    const {
-      match: {
-        params: { category, subcategory }
-      }
-    } = props;
+  const { category, subcategory } = useParams();
 
+  useEffect(() => {
     cms
       .get('/contents', {
         params: {
@@ -80,7 +76,7 @@ const Info = (props) => {
       .catch((err) => {
         console.log('Error :: ', err);
       });
-  }, [props]);
+  }, [category, subcategory]);
 
   // Don't put IonContent inside any parent element, otherwise it won't work. It should be at the root
   // 	of the component. That's why use Fragment instead to render same level elements. *

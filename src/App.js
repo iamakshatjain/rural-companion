@@ -47,13 +47,19 @@ const App = (props) => {
   return (
     <AudioPlayerProvider>
       <IonApp overflow-scroll="true">
-        <AppBar />
         <IonReactRouter>
+          <AppBar />
           <IonRouterOutlet>
             <Switch>
-              <Route path="/" exact component={CardList} />
-              <Route path="/:category" exact component={CardList} />
-              <Route path="/:category/:subcategory" exact component={Info} />
+              <Route path="/" exact>
+                <CardList />
+              </Route>
+              <Route path="/:category" exact>
+                <CardList />
+              </Route>
+              <Route path="/:category/:subcategory" exact>
+                <Info />
+              </Route>
             </Switch>
           </IonRouterOutlet>
         </IonReactRouter>

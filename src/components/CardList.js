@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   IonIcon,
   IonButton,
@@ -29,11 +29,7 @@ const colors = [
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
 
-  const {
-    match: {
-      params: { category = '', subcategory = '' }
-    }
-  } = props;
+  const { category = '', subcategory = '' } = useParams();
 
   useEffect(() => {
     if (!category && !subcategory) {
