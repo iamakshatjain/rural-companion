@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player/youtube';
 
-import '../static-data/assets/stylesheets/VideoPlayer.css';
+import '../assets/stylesheets/VideoPlayer.css';
 
 const { forwardRef, useRef, useImperativeHandle } = React;
 
