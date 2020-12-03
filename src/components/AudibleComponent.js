@@ -26,13 +26,13 @@ const AudibleComponent = ({ src }) => {
         {/* <IonIcon icon={playOutline} /> */}
       </div>
     );
-  } else {
-    return (
-      <div onClick={togglePlayPause}>
-        <Siriwave className="wave" style="ios9" amplitude={2} />
-      </div>
-    );
   }
+
+  return (
+    <div onClick={togglePlayPause}>
+      <Siriwave className="wave" style="ios9" amplitude={2} />
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {
