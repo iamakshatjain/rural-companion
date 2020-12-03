@@ -45,7 +45,7 @@ const CardList = (props) => {
 
   return (
     <div>
-      <div className="cardlist">
+      <div className="cardlist" style={{ marginTop: '8vh' }}>
         {cards.map((card, index) => (
           <IonCard
             key={index}
