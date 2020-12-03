@@ -43,7 +43,7 @@ const Info = () => {
 
   const [URL, setURL] = useState('');
   const [data, setData] = useState([]);
-  const [recommendations, setRecommendations] = useState([]);
+  // const [recommendations, setRecommendations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const ref = useRef(null);
   const player = useRef(null);
@@ -62,7 +62,7 @@ const Info = () => {
         const information = res.data[0];
         setURL(information.video_url);
         setData(information.data);
-        setRecommendations(information.recommendations);
+        // setRecommendations(information.recommendations);
         setIsLoading(false);
 
         // when loading is rendered, current is not available
@@ -189,13 +189,15 @@ const Info = () => {
     </>
   ) : (
     <>
-      <div className="player-wrapper" ref={ref}>
+      <div className="player-wrapper" ref={ref} style={{ marginTop: '8vh' }}>
         <VideoPlayer url={URL} ref={player} />
       </div>
 
       <div
         style={{
-          height: window.innerHeight - playerHeight,
+          // 8% of window height is consumed in margin of player-wrapper
+          // exta 2% for space at the bottom of list
+          height: 0.9 * window.innerHeight - playerHeight,
           overflowY: 'scroll'
         }}
       >
@@ -212,32 +214,6 @@ const Info = () => {
               })
           )}
         </IonList>
-
-        <h1
-          style={{
-            paddingLeft: '20px',
-            fontSize: '2.5rem'
-          }}
-        >
-          अन्य वीडियो
-        </h1>
-
-        {/* recommendations */}
-        <div>
-          <IonList>
-            {recommendations.map(
-              ({
-                icon_url: icon,
-                display_name: title,
-                content,
-                video_url: video
-              }) =>
-                createIonCard(icon, title, content, () => {
-                  setURL(video);
-                })
-            )}
-          </IonList>
-        </div>
       </div>
     </>
   );
