@@ -1,20 +1,21 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { IonIcon } from '@ionic/react';
-import { IonContent } from '@ionic/react';
 import { useAudioPlayer } from 'react-use-audio-player';
 import Siriwave from 'react-siriwave';
-import { playOutline } from 'ionicons/icons';
 
-const AudibleComponent = ({ src }) => {
-  const { togglePlayPause, playing } = useAudioPlayer({
+const AudibleComponent = ({ src, muted }) => {
+  const { playing, volume } = useAudioPlayer({
     src,
     format: 'mp3',
     autoplay: true
   });
-  if (!playing) {
+
+  if (muted) volume(0);
+  else volume(1);
+
+  if (!playing || muted) {
     return (
-      <div className="play" onClick={togglePlayPause}>
+      <div className="play">
         <hr
           style={{
             border: 0,
@@ -29,16 +30,18 @@ const AudibleComponent = ({ src }) => {
   }
 
   return (
-    <div onClick={togglePlayPause}>
+    // <div onClick={togglePlayPause}>
+    <div>
       <Siriwave className="wave" style="ios9" amplitude={2} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { src } = state.audio;
+  const { src, muted } = state.audio;
   return {
-    src
+    src,
+    muted
   };
 };
 

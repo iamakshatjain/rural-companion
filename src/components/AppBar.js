@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonToolbar,
@@ -8,10 +8,11 @@ import {
   IonIcon
 } from '@ionic/react';
 import { volumeHigh, volumeMute, arrowBackOutline } from 'ionicons/icons';
+import { connect } from 'react-redux';
+import { setMuteState } from '../actions';
 
-const AppBar = () => {
+const AppBar = ({ muted, setMuteState }) => {
   const history = useHistory();
-  const [isMuted, setIsMuted] = useState(false);
 
   return (
     <IonToolbar>
@@ -22,12 +23,23 @@ const AppBar = () => {
       </IonButtons>
       <IonTitle>Gramin Mitra</IonTitle>
       <IonButtons slot="end">
-        <IonButton onClick={() => setIsMuted(!isMuted)}>
-          <IonIcon slot="icon-only" icon={!isMuted ? volumeHigh : volumeMute} />
+        <IonButton
+          onClick={() => {
+            setMuteState(!muted);
+          }}
+        >
+          <IonIcon slot="icon-only" icon={!muted ? volumeHigh : volumeMute} />
         </IonButton>
       </IonButtons>
     </IonToolbar>
   );
 };
 
-export default AppBar;
+const mapStateToProps = (state) => {
+  const { muted } = state.audio;
+  return {
+    muted
+  };
+};
+
+export default connect(mapStateToProps, { setMuteState })(AppBar);

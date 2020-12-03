@@ -50,8 +50,6 @@ const CardList = (props) => {
           <IonCard
             key={index}
             onClick={() => props.setAudioSrc(card.voice_url)}
-            // TODO : remove this hardcoding
-            // To prevent accessibility button overlap
           >
             <IonGrid>
               <IonRow className="ion-align-items-center">
