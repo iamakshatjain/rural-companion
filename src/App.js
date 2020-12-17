@@ -10,7 +10,6 @@ import { getDeviceInfo } from './helpers';
 
 import CardList from './components/CardList';
 import Info from './components/Info';
-import AppBar from './components/AppBar';
 
 // importing bootstrap
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,7 +47,6 @@ const App = (props) => {
     <AudioPlayerProvider>
       <IonApp overflow-scroll="true">
         <IonReactRouter>
-          <AppBar />
           <IonRouterOutlet>
             <Switch>
               <Route path="/" exact>

@@ -18,6 +18,7 @@ import {
 } from '@ionic/react';
 import VideoPlayer from './VideoPlayer';
 import cms from '../apis';
+import AppBar from './AppBar';
 
 const createIonCard = (icon, title, content, onClick) => (
   <IonCard key={icon} onClick={onClick} style={{ cursor: 'pointer' }}>
@@ -86,6 +87,7 @@ const Info = () => {
 
   return isLoaderVisible ? (
     <>
+      <AppBar showVolumeIcon={!subcategory} />
       <IonList style={{ padding: '0' }}>
         <IonListHeader style={{ padding: '0' }}>
           <IonLabel style={{ margin: '0' }}>
@@ -189,7 +191,8 @@ const Info = () => {
     </>
   ) : (
     <>
-      <div className="player-wrapper" ref={ref} style={{ marginTop: '8vh' }}>
+      <AppBar showVolumeIcon={!subcategory} />
+      <div className="player-wrapper" ref={ref}>
         <VideoPlayer url={URL} ref={player} />
       </div>
 

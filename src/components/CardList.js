@@ -12,6 +12,7 @@ import {
 import gmApi from '../apis';
 import { setAudioSrc } from '../actions';
 import AudibleComponent from './AudibleComponent';
+import AppBar from './AppBar';
 import '../assets/stylesheets/CardList.css';
 
 const colors = [
@@ -45,7 +46,8 @@ const CardList = (props) => {
 
   return (
     <div>
-      <div className="cardlist" style={{ paddingTop: '8vh' }}>
+      <AppBar showVolumeIcon={!subcategory}/>
+      <div className="cardlist">
         {cards.map((card, index) => (
           <IonCard
             key={index}

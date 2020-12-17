@@ -11,7 +11,7 @@ import { volumeHigh, volumeMute, arrowBackOutline } from 'ionicons/icons';
 import { connect } from 'react-redux';
 import { setMuteState } from '../actions';
 
-const AppBar = ({ muted, setMuteState }) => {
+const AppBar = ({ muted, setMuteState, showVolumeIcon }) => {
   const history = useHistory();
 
   return (
@@ -22,7 +22,7 @@ const AppBar = ({ muted, setMuteState }) => {
         </IonButton>
       </IonButtons>
       <IonTitle>Gramin Mitra</IonTitle>
-      <IonButtons slot="end">
+      { showVolumeIcon && <IonButtons slot="end">
         <IonButton
           onClick={() => {
             setMuteState(!muted);
@@ -30,7 +30,7 @@ const AppBar = ({ muted, setMuteState }) => {
         >
           <IonIcon slot="icon-only" icon={!muted ? volumeHigh : volumeMute} />
         </IonButton>
-      </IonButtons>
+      </IonButtons> }
     </IonToolbar>
   );
 };
