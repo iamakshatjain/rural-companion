@@ -36,3 +36,11 @@ canvas {
 	width: 100% !important;
 	height: 100% !important;
 }
+
+.overlay {
+	height: 0px;
+	overflow: visible;
+	pointer-events: none;
+	background:none;
+	opacity: 0.3;
+  }

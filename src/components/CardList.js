@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -29,6 +29,7 @@ const colors = [
 
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
+  const [overlayVisibility, setOverlayVisibility] = useState(false);
 
   const { category = '', subcategory = '' } = useParams();
 
@@ -36,18 +37,24 @@ const CardList = (props) => {
     if (!category && !subcategory) {
       gmApi.get('/categories').then((response) => {
         setCards(response.data);
+        if(overlayVisibility){
+          setOverlayVisibility(false);
+        }
       });
     } else if (!subcategory) {
       gmApi.get(`/sub-categories?category=${category}`).then((response) => {
         setCards(response.data[0].data);
+        if(overlayVisibility){
+          setOverlayVisibility(false);
+        }
       });
     }
-  }, [category, subcategory]);
+  }, [category, subcategory, overlayVisibility]);
 
   return (
-    <div>
-      <AppBar showVolumeIcon={!subcategory}/>
-      <div className="cardlist">
+    <Fragment>
+      <AppBar showVolumeIcon={!subcategory && !overlayVisibility}/>
+      <div className={`cardlist ${overlayVisibility && 'overlay'}`}>
         {cards.map((card, index) => (
           <IonCard
             key={index}
@@ -64,10 +71,10 @@ const CardList = (props) => {
                 <IonCol size="3">
                   <Link
                     to={`${category}/${card.keyword}`}
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {e.stopPropagation(); setOverlayVisibility(true);}}
                   >
                     <div className="card-button">
-                      <IonButton color={`${colors[index]}`} size="large">
+                      <IonButton color={`${colors[index]}`} size="large" disabled={!!overlayVisibility}>
                         &gt;
                       </IonButton>
                     </div>
@@ -78,10 +85,10 @@ const CardList = (props) => {
           </IonCard>
         ))}
       </div>
-      <div className="bottom-bar">
+      {!overlayVisibility && <div className='bottom-bar'>
         <AudibleComponent />
-      </div>
-    </div>
+      </div>}
+    </Fragment>
   );
 };
 
