@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
@@ -37,14 +37,14 @@ const CardList = (props) => {
     if (!category && !subcategory) {
       gmApi.get('/categories').then((response) => {
         setCards(response.data);
-        if(overlayVisibility){
+        if (overlayVisibility) {
           setOverlayVisibility(false);
         }
       });
     } else if (!subcategory) {
       gmApi.get(`/sub-categories?category=${category}`).then((response) => {
         setCards(response.data[0].data);
-        if(overlayVisibility){
+        if (overlayVisibility) {
           setOverlayVisibility(false);
         }
       });
@@ -52,13 +52,15 @@ const CardList = (props) => {
   }, [category, subcategory, overlayVisibility]);
 
   return (
-    <Fragment>
-      <AppBar showVolumeIcon={!subcategory && !overlayVisibility}/>
+    <>
+      <AppBar showVolumeIcon={!subcategory && !overlayVisibility} />
       <div className={`cardlist ${overlayVisibility && 'overlay'}`}>
         {cards.map((card, index) => (
           <IonCard
             key={index}
-            onClick={() => props.setAudioSrc(card.voice_url)}
+            onClick={() => {
+              if (!props.muted) props.setAudioSrc(card.voice_url);
+            }}
           >
             <IonGrid>
               <IonRow className="ion-align-items-center">
@@ -71,10 +73,17 @@ const CardList = (props) => {
                 <IonCol size="3">
                   <Link
                     to={`${category}/${card.keyword}`}
-                    onClick={(e) => {e.stopPropagation(); setOverlayVisibility(true);}}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOverlayVisibility(true);
+                    }}
                   >
                     <div className="card-button">
-                      <IonButton color={`${colors[index]}`} size="large" disabled={!!overlayVisibility}>
+                      <IonButton
+                        color={`${colors[index]}`}
+                        size="large"
+                        disabled={!!overlayVisibility}
+                      >
                         &gt;
                       </IonButton>
                     </div>
@@ -85,11 +94,20 @@ const CardList = (props) => {
           </IonCard>
         ))}
       </div>
-      {!overlayVisibility && <div className='bottom-bar'>
-        <AudibleComponent />
-      </div>}
-    </Fragment>
+      {!overlayVisibility && (
+        <div className="bottom-bar">
+          <AudibleComponent />
+        </div>
+      )}
+    </>
   );
 };
 
-export default connect(null, { setAudioSrc })(CardList);
+const mapStateToProps = (state) => {
+  const { muted } = state.audio;
+  return {
+    muted
+  };
+};
+
+export default connect(mapStateToProps, { setAudioSrc })(CardList);
