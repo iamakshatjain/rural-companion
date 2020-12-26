@@ -7,7 +7,9 @@ import {
   IonCard,
   IonGrid,
   IonRow,
-  IonCol
+  IonCol,
+  IonContent,
+  IonProgressBar
 } from '@ionic/react';
 import gmApi from '../apis';
 import { setAudioSrc } from '../actions';
@@ -27,9 +29,30 @@ const colors = [
   'dark'
 ];
 
+const Loader = () => (
+  <IonContent>
+    <div
+      style={{
+        margin: 0,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+      }}
+    >
+      <img
+        src="https://res.cloudinary.com/dndf9znin/image/upload/v1595932996/Gramin_mitra_logo_d5059c7482.png"
+        alt="logo-loader"
+      />
+      <IonProgressBar type="indeterminate" />
+    </div>
+  </IonContent>
+);
+
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
   const [overlayVisibility, setOverlayVisibility] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { category = '', subcategory = '' } = useParams();
 
@@ -37,8 +60,8 @@ const CardList = (props) => {
     if (!category && !subcategory) {
       gmApi.get('/categories').then((response) => {
         setCards(response.data);
-        if (overlayVisibility) {
-          setOverlayVisibility(false);
+        if (isLoading) {
+          setIsLoading(false);
         }
       });
     } else if (!subcategory) {
@@ -49,9 +72,11 @@ const CardList = (props) => {
         }
       });
     }
-  }, [category, subcategory, overlayVisibility]);
+  }, [category, subcategory, overlayVisibility, isLoading]);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <AppBar showVolumeIcon={!subcategory && !overlayVisibility} />
       <div className={`cardlist ${overlayVisibility && 'overlay'}`}>
