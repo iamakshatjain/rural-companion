@@ -4,6 +4,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { connect } from 'react-redux';
 import { AudioPlayerProvider } from 'react-use-audio-player';
+import { Plugins, Capacitor } from '@capacitor/core';
 
 import { setDevice } from './actions';
 import { getDeviceInfo } from './helpers';
@@ -35,6 +36,13 @@ import './theme/variables.css';
 
 const App = (props) => {
   useEffect(() => {
+    if (Capacitor.isNative) {
+      Plugins.App.addListener('backButton', () => {
+        if (window.location.pathname === '/') {
+          Plugins.App.exitApp();
+        }
+      });
+    }
     console.log('mount');
     console.log('getting device info');
     getDeviceInfo().then((dev) => {
