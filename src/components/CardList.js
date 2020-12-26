@@ -67,6 +67,9 @@ const CardList = (props) => {
     } else if (!subcategory) {
       gmApi.get(`/sub-categories?category=${category}`).then((response) => {
         setCards(response.data[0].data);
+        if (isLoading) {
+          setIsLoading(false);
+        }
         if (overlayVisibility) {
           setOverlayVisibility(false);
         }
