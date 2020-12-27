@@ -87,7 +87,7 @@ const Info = () => {
 
   return isLoaderVisible ? (
     <>
-      <AppBar showVolumeIcon={!subcategory} />
+      <AppBar showVolumeButton={!subcategory} showBackButton={(category || subcategory)}/>
       <IonList style={{ padding: '0' }}>
         <IonListHeader style={{ padding: '0' }}>
           <IonLabel style={{ margin: '0' }}>
@@ -191,7 +191,7 @@ const Info = () => {
     </>
   ) : (
     <>
-      <AppBar showVolumeIcon={!subcategory} />
+      <AppBar showVolumeIcon={!subcategory} showBackButton={(category || subcategory)}/>
       <div className="player-wrapper" ref={ref}>
         <VideoPlayer url={URL} ref={player} />
       </div>

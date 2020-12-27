@@ -81,7 +81,7 @@ const CardList = (props) => {
     <Loader />
   ) : (
     <>
-      <AppBar showVolumeIcon={!subcategory && !overlayVisibility} />
+      <AppBar showVolumeButton={!subcategory && !overlayVisibility} showBackButton={category || subcategory}/>
       <div className={`cardlist ${overlayVisibility && 'overlay'}`}>
         {cards.map((card, index) => (
           <IonCard
